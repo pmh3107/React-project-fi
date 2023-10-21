@@ -91,18 +91,14 @@
     display: none;
 
     @include abstracts.screen(lg) {
+      margin-left: auto;
       display: block;
       padding: 11px 40px;
-      top: 9px;
-      right: -20px;
-      position: absolute;
     }
 
     @include abstracts.screen(sm) {
+      margin-left: auto;
       padding: 0 20px 10px;
-      position: absolute;
-      top: 7px;
-      right: -4px;
     }
   }
 

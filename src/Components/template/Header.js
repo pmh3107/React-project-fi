@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "../../css/style.css";
+// Add logo
 import Logo from "../assets/logo/logo.png";
 import ArrowDown from "../assets/icon/arrow-down.svg";
 import More from "../assets/icon/more.svg";
-import "../../js/scripts";
+// import "../../js/scripts";
 import Vinfast from "../assets/category/Vinfast.png";
 import KIA from "../assets/category/KIA.png";
 import Suzuki from "../assets/category/Suzuki.png";
