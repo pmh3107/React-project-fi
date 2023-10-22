@@ -82,41 +82,14 @@
     margin-top: 10px;
   }
 
-  &__icon {
-    position: relative;
-
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-
-    @include abstracts.screen(xl) {
-      display: none;
-    }
-
-    @include abstracts.screen(lg) {
-      display: block;
-    }
-  }
-
   &__content {
     flex: 1;
   }
 
-  &__icon-1 {
+  &__icon {
     width: 30px;
     height: 30px;
     object-fit: contain;
-  }
-
-  &__icon-2 {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    filter: var(--menu-column-icon-color);
   }
 
   &__heading {

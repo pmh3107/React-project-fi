@@ -152,7 +152,6 @@ function Footer() {
               key={index}
               title={product.title}
               product={product.product}
-              link={product.product}
             />
           ))}
           {/* Footer column 3 */}
@@ -161,7 +160,6 @@ function Footer() {
               key={index}
               title={product.title}
               product={product.product}
-              link={product.product}
             />
           ))}
           {/* Footer column 4 */}
