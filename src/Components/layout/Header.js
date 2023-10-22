@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../css/style.css";
+import LogoLink from "../commons/Logo";
 import ArrowDown from "../assets/icon/arrow-down.svg";
 import More from "../assets/icon/more.svg";
 // import "../../js/scripts";
@@ -12,7 +13,6 @@ import Honda from "../assets/category/honda.jpg";
 import Mazda from "../assets/category/mazda.png";
 import Mercedes from "../assets/category/mercedes.jpg";
 import Exit from "../assets/icon/exit.svg";
-
 function Header() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
@@ -32,14 +32,18 @@ function Header() {
             <img src={More} alt="" className="icon top-bar__more-icon" />
           </button>
           {/* Logo */}
-          <a href="./" className="logo top-bar__logo">
+          {/* <a href="./" className="logo top-bar__logo">
             <img
-              src="https://i.imgur.com/TpDQQxk.png"
+              src={Logo}
               alt="Xe lướt miền Trung"
               className="logo__img top-bar__logo-img"
             />
-          </a>
+          </a> */}
           {/* Navbar */}
+          <LogoLink
+            className="top-bar__logo"
+            imgClassName="top-bar__logo-img"
+          />
           <nav
             id="navbar"
             className={`navbar ${isNavbarVisible ? "show" : ""}`}
