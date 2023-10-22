@@ -153,26 +153,6 @@
       height: 42px;
     }
 
-    &--facebook {
-      background: #4863a9;
-    }
-
-    &--youtube {
-      background: #f00;
-    }
-
-    &--tiktok {
-      background: #000;
-    }
-
-    &--twitter {
-      background: #4999e6;
-    }
-
-    &--linkedin {
-      background: #2f71ab;
-    }
-
     &:hover {
       filter: grayscale(0);
       translate: 0 -3px;

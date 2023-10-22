@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import "../../css/style.css";
-// Add logo
-import Logo from "../assets/logo/logo.png";
 import ArrowDown from "../assets/icon/arrow-down.svg";
 import More from "../assets/icon/more.svg";
 // import "../../js/scripts";
@@ -36,7 +34,7 @@ function Header() {
           {/* Logo */}
           <a href="./" className="logo top-bar__logo">
             <img
-              src={Logo}
+              src="https://i.imgur.com/TpDQQxk.png"
               alt="Xe lướt miền Trung"
               className="logo__img top-bar__logo-img"
             />

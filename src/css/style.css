@@ -1849,21 +1849,6 @@ html {
     height: 42px;
   }
 }
-.footer__social-link--facebook {
-  background: #4863a9;
-}
-.footer__social-link--youtube {
-  background: #f00;
-}
-.footer__social-link--tiktok {
-  background: #000;
-}
-.footer__social-link--twitter {
-  background: #4999e6;
-}
-.footer__social-link--linkedin {
-  background: #2f71ab;
-}
 .footer__social-link:hover {
   filter: grayscale(0);
   translate: 0 -3px;
