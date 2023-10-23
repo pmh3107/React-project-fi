@@ -200,7 +200,7 @@ input {
 
 .container-fluid, .container {
   --grid-gutter-x: 30px;
-  --grid-gutter-y: 0;
+  --grid-gutter-y: 30px;
   width: 1370px;
   margin-left: auto;
   margin-right: auto;
@@ -2034,12 +2034,14 @@ html {
 .slideshow__inner {
   display: flex;
   overflow: hidden;
+  transition: all ease 1s;
 }
 .slideshow__item {
   position: relative;
   flex-shrink: 0;
   width: 100%;
   padding-top: 34%;
+  transition: all ease 1s;
 }
 @media (max-width: 767.98px) {
   .slideshow__item {
@@ -2217,7 +2219,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  margin-left: 10px;
   height: 46px;
   padding: 0 20px;
   border-radius: 6px;
@@ -2300,7 +2302,7 @@ html {
   align-items: center;
   margin-top: auto;
 }
-.product-card__star {
+.product-card__year {
   margin: 0 6px 0 auto;
 }
 

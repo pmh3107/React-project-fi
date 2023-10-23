@@ -1,5 +1,5 @@
 import React from "react";
-
+import ButtonPrimary from "../commons/Button";
 export default function Sign() {
   const signInfo = [
     {
@@ -16,9 +16,12 @@ export default function Sign() {
   return (
     <div className="top-act">
       {signInfo.map((item, index) => (
-        <a key={index} href={item.link} className={`btn ${item.className}`}>
-          {item.nameBtn}
-        </a>
+        <ButtonPrimary
+          key={index}
+          href={item.link}
+          className={`btn ${item.className}`}
+          name={item.nameBtn}
+        />
       ))}
     </div>
   );
