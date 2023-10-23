@@ -168,7 +168,6 @@ function Footer() {
               key={index}
               title={product.title}
               product={product.product}
-              infomation={product.product}
             />
           ))}
         </div>

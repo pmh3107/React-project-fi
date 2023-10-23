@@ -27,9 +27,12 @@
     justify-content: space-between;
     padding: 16px 0;
   }
-
+  &__more {
+    order: 1;
+  }
   &__logo {
     @include abstracts.screen(lg) {
+      order: 2;
       gap: 10px !important;
       margin-left: 40px;
 
@@ -196,6 +199,7 @@
 }
 
 .top-act {
+  order: 3;
   @extend %flexItemsCenter;
   gap: 20px;
   margin-left: auto;
