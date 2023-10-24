@@ -2976,6 +2976,8 @@ html {
   }
 }
 .auth__text-link {
+  margin-left: 10px;
+  text-decoration: underline;
   font-size: inherit;
 }
 

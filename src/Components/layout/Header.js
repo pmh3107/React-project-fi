@@ -26,10 +26,10 @@ function Navbar() {
     setIsNavbarVisible(!isNavbarVisible);
   };
   const navItems = [
-    { name: "Trang chủ", hasDropdown: false, link: "#!" },
+    { name: "Trang chủ", hasDropdown: false, link: "/" },
     { name: "Sản Phẩm", hasDropdown: true, link: "#!" },
     { name: "Dịch vụ", hasDropdown: false, link: "#!" },
-    { name: "Liên hệ", hasDropdown: false, link: "#!" },
+    { name: "Liên hệ", hasDropdown: false, link: "/contact" },
   ];
   return (
     <>

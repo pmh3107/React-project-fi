@@ -1,27 +1,25 @@
 import React from "react";
-import ButtonPrimary from "../commons/Button";
+// import ButtonPrimary from "../commons/Button";
 export default function Sign() {
   const signInfo = [
     {
-      link: "#!",
+      link: "/signIn",
       nameBtn: "Đăng nhập",
       className: "btn--text d-md-none",
     },
     {
       link: "#!",
       nameBtn: "Đăng ký",
-      className: "top-act__sign-up btn--primary",
+      className: "top-act__sign-up btn btn--primary",
     },
   ];
   return (
     <div className="top-act">
       {signInfo.map((item, index) => (
-        <ButtonPrimary
-          key={index}
-          href={item.link}
-          className={`btn ${item.className}`}
-          name={item.nameBtn}
-        />
+        <a key={index} className={item.className} href={item.link}>
+          {" "}
+          {item.nameBtn}
+        </a>
       ))}
     </div>
   );

@@ -13,11 +13,10 @@ const FilterPrice = () => {
       </label>
       <div className="filter__form-group">
         <Slider
-          class="filter__form-slider"
           min={0}
           max={100}
-          defaultValue={[0, 50]}
-          marks={{ 0: "0%", 100: "100%" }}
+          defaultValue={[0, 100]}
+          marks={{ 0: "250tr", 100: "10ty" }}
         />
       </div>
       <div className="filter__form-group filter__form-group--inline">
@@ -137,12 +136,11 @@ export default function Filter() {
       <div class="filter-wrap">
         <button class="filter-btn js-toggle" onClick={toggleFilter}>
           Lọc
-          <img src={FilterIcon} className="filter-btn__icon icon" />
+          <img src={FilterIcon} alt="" className="filter-btn__icon icon" />
         </button>
-
         <div
           id="home-filter"
-          className={`filter hide ${isFilterVisible ? "show" : ""}`}
+          className={`filter ${isFilterVisible ? "" : "hide"}`}
         >
           <img src={ArrowUp} alt="" className="filter__arrow" />
           <h3 className="filter__heading">Lọc</h3>

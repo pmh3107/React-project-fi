@@ -52,7 +52,7 @@ function SendEmail() {
           placeholder="Địa chỉ Email"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <ButtonPrimary name="Gửi" />
+        <ButtonPrimary name="Gửi" className="btn--primary" />
       </form>
     </>
   );

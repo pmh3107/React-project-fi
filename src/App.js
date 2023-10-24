@@ -1,14 +1,17 @@
 import React from "react";
-import Header from "./Components/layout/Header";
-import Footer from "./Components/layout/Footer";
-import Main from "./Components/pages/Main";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./Components/Homepage";
+import ContactPage from "./Components/ContactPage";
+import SignIn from "./Components/SignIn";
 function App() {
   return (
-    <>
-      <Header />
-      <Main />
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route exact path="/" Component={HomePage} />
+        <Route path="/contact" Component={ContactPage} />
+        <Route path="/signIn" Component={SignIn} />
+      </Routes>
+    </Router>
   );
 }
 
