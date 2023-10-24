@@ -8,7 +8,7 @@ export default function Sign() {
       className: "btn--text d-md-none",
     },
     {
-      link: "#!",
+      link: "/signUp",
       nameBtn: "Đăng ký",
       className: "top-act__sign-up btn btn--primary",
     },

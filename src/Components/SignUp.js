@@ -40,6 +40,12 @@ function FormSignIn() {
       srcImg: LockIcon,
       minLength: "6",
     },
+    {
+      type: "password",
+      placeholder: "Xác nhận mật khẩu",
+      errorAlert: "Mật khẩu phải có ít nhất 6 kí tự ....",
+      srcImg: LockIcon,
+    },
   ];
 
   return (
@@ -64,9 +70,6 @@ function FormSignIn() {
           />
           <span className="form__checkbox-label">Ghi nhớ đăng nhập</span>
         </label>
-        <a href="/resetPass" className="auth__link form__pull-right">
-          Quên mật khẩu ?
-        </a>
       </div>
       <div className="form__group auth__btn-group">
         <button class="btn btn--primary auth__btn form__submit-btn">
@@ -99,16 +102,16 @@ export default function SignIn() {
         <div className="auth__content">
           <div className="auth__content-inner">
             <LogoPrimary />
-            <h1 className="auth__heading">Xin chào!</h1>
+            <h1 className="auth__heading">Đăng ký</h1>
             <p className="auth__desc">
-              Chào mừng bạn đã quay lại với Xe lướt miền Trung. Hãy đăng nhập và
-              khám phá những dòng xe mới nhé ☺️
+              Tạo tài khoảng để nhận được hỗ trợ tốt nhất từ Xe lướt miền Trung
+              nhé.
             </p>
             <FormSignIn />
             <p className="auth__text">
               Bạn đã có tài khoảng chưa ?
-              <a href="/signUp" className="auth__link auth__text-link">
-                Đăng kí
+              <a href="./signIn" className="auth__link auth__text-link">
+                Đăng nhập
               </a>
             </p>
           </div>
