@@ -49,7 +49,7 @@ function FormSignIn() {
   ];
 
   return (
-    <form action="./" className="form auth__form">
+    <form action="/HomePage" className="form auth__form">
       {inputOption.map((content, index) => (
         <InputSign
           key={index}

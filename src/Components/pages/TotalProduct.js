@@ -15,7 +15,7 @@ function Product(props) {
       <div className="col">
         <article className="product-card">
           <div className="product-card__img-wrap">
-            <a href="./product-detail.html">
+            <a href={props.link}>
               <img src={props.srcImg} alt="" className="product-card__thumb" />
             </a>
             <button className="like-btn product-card__like-btn">
@@ -24,7 +24,7 @@ function Product(props) {
             </button>
           </div>
           <h3 className="product-card__title">
-            <a href="./product-detail.html">{props.title}</a>
+            <a href={props.link}>{props.title}</a>
           </h3>
           <p className="product-card__brand">{`Số km: ${props.kmNumber} km`}</p>
           <div className="product-card__row">
@@ -45,6 +45,7 @@ export default function TotalProduct() {
       price: "1 tỷ 430 triệu",
       kmNumber: "2.000",
       year: "2023",
+      link: "/productDetail",
     },
     {
       srcImg: Morning,
@@ -52,6 +53,7 @@ export default function TotalProduct() {
       price: "239 triệu",
       kmNumber: "38.000km",
       year: "2020",
+      link: "/productDetail",
     },
     {
       srcImg: Civic,
@@ -59,6 +61,7 @@ export default function TotalProduct() {
       price: "799 triệu",
       kmNumber: "7.000km",
       year: "2021",
+      link: "/productDetail",
     },
     {
       srcImg: LuxA,
@@ -66,6 +69,7 @@ export default function TotalProduct() {
       price: "569 triệu",
       kmNumber: "37.000km",
       year: "2021",
+      link: "/productDetail",
     },
     {
       srcImg: Canival,
@@ -73,6 +77,7 @@ export default function TotalProduct() {
       price: "1 tỷ 430 triệu",
       kmNumber: "2.000",
       year: "2023",
+      link: "/productDetail",
     },
     {
       srcImg: Morning,
@@ -80,6 +85,7 @@ export default function TotalProduct() {
       price: "239 triệu",
       kmNumber: "38.000km",
       year: "2020",
+      link: "/productDetail",
     },
     {
       srcImg: Civic,
@@ -87,6 +93,7 @@ export default function TotalProduct() {
       price: "799 triệu",
       kmNumber: "7.000km",
       year: "2021",
+      link: "/productDetail",
     },
     {
       srcImg: LuxA,
@@ -94,6 +101,7 @@ export default function TotalProduct() {
       price: "569 triệu",
       kmNumber: "37.000km",
       year: "2021",
+      link: "/productDetail",
     },
     {
       srcImg: Canival,
@@ -101,6 +109,7 @@ export default function TotalProduct() {
       price: "1 tỷ 430 triệu",
       kmNumber: "2.000",
       year: "2023",
+      link: "/productDetail",
     },
     {
       srcImg: Morning,
@@ -108,6 +117,7 @@ export default function TotalProduct() {
       price: "239 triệu",
       kmNumber: "38.000km",
       year: "2020",
+      link: "/productDetail",
     },
     {
       srcImg: Civic,
@@ -115,6 +125,7 @@ export default function TotalProduct() {
       price: "799 triệu",
       kmNumber: "7.000km",
       year: "2021",
+      link: "/productDetail",
     },
     {
       srcImg: LuxA,
@@ -122,6 +133,7 @@ export default function TotalProduct() {
       price: "569 triệu",
       kmNumber: "37.000km",
       year: "2021",
+      link: "/productDetail",
     },
   ];
   return (
@@ -140,6 +152,7 @@ export default function TotalProduct() {
               title={content.title}
               kmNumber={content.kmNumber}
               year={content.year}
+              link={content.link}
             />
           ))}
         </div>

@@ -43,7 +43,7 @@ function FormSignIn() {
   ];
 
   return (
-    <form action="./" className="form auth__form">
+    <form action="/HomePage" className="form auth__form">
       {inputOption.map((content, index) => (
         <InputSign
           key={index}
@@ -70,7 +70,7 @@ function FormSignIn() {
       </div>
       <div className="form__group auth__btn-group">
         <button class="btn btn--primary auth__btn form__submit-btn">
-          Đăng ký
+          Đăng Nhập
         </button>
         <button class="btn btn--outline auth__btn btn--no-margin">
           <img src="./assets/icons/google.svg" alt="" class="btn__icon icon" />

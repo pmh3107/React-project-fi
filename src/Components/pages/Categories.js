@@ -38,7 +38,6 @@ export default function Categories() {
           <h2 className="home__heading">Phân khúc giá</h2>
         </div>
         <div className="home__cate row row-cols-2 row-cols-md-1">
-          {/* Category item 1 */}
           {categoryData.map((content, index) => (
             <div className="col">
               <a href="#!">
