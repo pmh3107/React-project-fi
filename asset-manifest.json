@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/React-project-fi/static/css/main.6a326945.css",
-    "main.js": "/React-project-fi/static/js/main.400967ab.js",
+    "main.css": "/React-project-fi/static/css/main.e62262f5.css",
+    "main.js": "/React-project-fi/static/js/main.4e1ed5a9.js",
     "static/media/Item-2-md.png": "/React-project-fi/static/media/Item-2-md.2c307c7a13ffff12d459.png",
     "static/media/Item-2.png": "/React-project-fi/static/media/Item-2.ed6307eec35a81ba58c7.png",
     "static/media/Item-3.png": "/React-project-fi/static/media/Item-3.688a15ef7f2b8dcc09e8.png",
@@ -11,7 +11,9 @@
     "static/media/B.png": "/React-project-fi/static/media/B.4a31b664635591c6ce0d.png",
     "static/media/intro.svg": "/React-project-fi/static/media/intro.0abb7254e336ac9c02302cbc28a274b6.svg",
     "static/media/logo.png": "/React-project-fi/static/media/logo.d5b1f7dc2960f55ba47d.png",
+    "static/media/avatar-3.png": "/React-project-fi/static/media/avatar-3.ee18964d6f694e288e7e.png",
     "static/media/avatar-1.png": "/React-project-fi/static/media/avatar-1.68559d513104e37e244e.png",
+    "static/media/avatar-2.png": "/React-project-fi/static/media/avatar-2.b681fe4a726d512f7ad8.png",
     "static/media/forgot-password.png": "/React-project-fi/static/media/forgot-password.4534a3d7eede987dbc6d.png",
     "static/media/heart-red.svg": "/React-project-fi/static/media/heart-red.b7e0f2bc6b141605ae5b5432d9f77ab9.svg",
     "index.html": "/React-project-fi/index.html",
@@ -32,11 +34,12 @@
     "static/media/search.svg": "/React-project-fi/static/media/search.daf3b37fc4c72263622eaf5709f24438.svg",
     "static/media/dropdown-arrow.svg": "/React-project-fi/static/media/dropdown-arrow.4aac2041496d311e064d.svg",
     "static/media/arrow-down.svg": "/React-project-fi/static/media/arrow-down.ae08ba4a3c275b85e1c7eb98f07a95e7.svg",
-    "main.6a326945.css.map": "/React-project-fi/static/css/main.6a326945.css.map",
-    "main.400967ab.js.map": "/React-project-fi/static/js/main.400967ab.js.map"
+    "static/media/arrow-right.svg": "/React-project-fi/static/media/arrow-right.cf43e079c39e9e49297007b7b690cfd7.svg",
+    "main.e62262f5.css.map": "/React-project-fi/static/css/main.e62262f5.css.map",
+    "main.4e1ed5a9.js.map": "/React-project-fi/static/js/main.4e1ed5a9.js.map"
   },
   "entrypoints": [
-    "static/css/main.6a326945.css",
-    "static/js/main.400967ab.js"
+    "static/css/main.e62262f5.css",
+    "static/js/main.4e1ed5a9.js"
   ]
 }
