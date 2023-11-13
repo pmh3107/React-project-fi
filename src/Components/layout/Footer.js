@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../../css/style.css";
 import LogoLink from "../commons/Logo";
 import ButtonPrimary from "../commons/Button";
 import SocialLink from "../commons/SocialLink";

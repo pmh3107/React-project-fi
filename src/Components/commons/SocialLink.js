@@ -3,7 +3,6 @@ import Youtube from "../assets/icon/youtube.svg";
 import Twitter from "../assets/icon/twitter.svg";
 import Tiktok from "../assets/icon/tiktok.svg";
 import Linkedin from "../assets/icon/linkedin.svg";
-import "../../css/style.css";
 export default function Social() {
   const socialInfo = [
     {

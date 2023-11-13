@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../../css/style.css";
+import { Link } from "react-router-dom";
+
 import LogoLink from "../commons/Logo";
 import DropDown from "./Dropdown";
 
@@ -14,42 +15,39 @@ import Avatar from "../assets/avatar/avatar-1.png";
 function AlreadySingIn() {
   return (
     <>
-      <>
-        {/* Actions */}
-        <div className="top-act">
-          <div className="top-act__group d-md-none top-act__group--single">
-            <button className="top-act__btn">
-              <img src={IconSearch} alt="" className="icon top-act__icon" />
-            </button>
-          </div>
-          <div className="top-act__group d-md-none">
-            <button className="top-act__btn">
-              <img src={IconHeart} alt="" className="icon top-act__icon" />
-              <span className="top-act__title">03</span>
-            </button>
-            <div className="top-act__separate" />
-            <button className="top-act__btn">
-              <img src={IconCar} alt="" className="icon top-act__icon" />
-              <span className="top-act__title" />
-            </button>
-          </div>
-          <div className="top-act__user">
-            <img src={Avatar} alt="" className="top-act__avatar" />
-          </div>
+      <div className="top-act">
+        <div className="top-act__group d-md-none top-act__group--single">
+          <button className="top-act__btn">
+            <img src={IconSearch} alt="" className="icon top-act__icon" />
+          </button>
         </div>
-      </>
+        <div className="top-act__group d-md-none">
+          <button className="top-act__btn">
+            <img src={IconHeart} alt="" className="icon top-act__icon" />
+            <span className="top-act__title">03</span>
+          </button>
+          <div className="top-act__separate" />
+          <button className="top-act__btn">
+            <img src={IconCar} alt="" className="icon top-act__icon" />
+            <span className="top-act__title" />
+          </button>
+        </div>
+        <div className="top-act__user">
+          <img src={Avatar} alt="" className="top-act__avatar" />
+        </div>
+      </div>
     </>
   );
 }
 function NavbarItem({ link, name, hasDropdown = false }) {
   return (
     <li className="navbar__item">
-      <a href={link} className="navbar__link">
+      <Link to={link} className="navbar__link">
         {name}
         {hasDropdown && (
           <img src={ArrowDown} alt="" className="icon navbar__arrow" />
         )}
-      </a>
+      </Link>
       {hasDropdown && <DropDown />}
     </li>
   );
@@ -93,7 +91,7 @@ function Navbar() {
 }
 function Header() {
   return (
-    <header class="header">
+    <header className="header">
       <div className="container">
         <div className="top-bar">
           <LogoLink

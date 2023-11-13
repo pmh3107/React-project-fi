@@ -4,7 +4,7 @@ import IconBackground from "./assets/authImg/intro.svg";
 import EmailIcon from "./assets/icon/message.svg";
 import IconError from "./assets/icon/form-error.svg";
 import LockIcon from "./assets/icon/lock.svg";
-
+import "../sass/main.scss";
 function InputSign(props) {
   return (
     <div className="form__group">

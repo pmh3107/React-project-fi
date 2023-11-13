@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../css/style.css";
+import { Link } from "react-router-dom";
 import LogoLink from "../commons/Logo";
 import DropDown from "./Dropdown";
 import ActionSign from "./ActionsSign";
@@ -10,12 +10,12 @@ import Exit from "../assets/icon/exit.svg";
 function NavbarItem({ link, name, hasDropdown = false }) {
   return (
     <li className="navbar__item">
-      <a href={link} className="navbar__link">
+      <Link to={link} className="navbar__link">
         {name}
         {hasDropdown && (
           <img src={ArrowDown} alt="" className="icon navbar__arrow" />
         )}
-      </a>
+      </Link>
       {hasDropdown && <DropDown />}
     </li>
   );
@@ -59,7 +59,7 @@ function Navbar() {
 }
 function Header() {
   return (
-    <header class="header">
+    <header className="header">
       <div className="container">
         <div className="top-bar">
           <LogoLink

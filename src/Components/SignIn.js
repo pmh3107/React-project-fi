@@ -111,6 +111,9 @@ export default function SignIn() {
                 Đăng kí
               </a>
             </p>
+            <a href="/admin" className="auth__link auth__text-link">
+              bạn là Admin ?
+            </a>
           </div>
         </div>
       </main>

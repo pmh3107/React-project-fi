@@ -26,7 +26,7 @@ function FormSignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Đã gửi mail đặt lại mật khẩu vào email: " + email);
-    console.log("Đã gửi enail:", email);
+    console.log("Đã gửi email:", email);
   };
   return (
     <form action="./" className="form auth__form">

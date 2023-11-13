@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import HeaderAlreadySingIn from "./layout/HeaderAlreadySignIn";
 import Footer from "./layout/Footer";
-
 import IconSearch from "./assets/icon/search.svg";
 import ArrowRight from "./assets/icon/arrow-right.svg";
 import Canival from "./assets/product/Canival.jpg";
@@ -129,9 +128,12 @@ function DetailCar() {
                   </div>
                   <p className="prod-info__total-price">{carData.price}</p>
                   <div className="prod-info__row">
-                    <button className="btn btn--primary prod-info__add-to-cart">
+                    <a
+                      href="/deposit"
+                      className="btn btn--primary prod-info__add-to-cart"
+                    >
                       Đặt cọc ngay
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
