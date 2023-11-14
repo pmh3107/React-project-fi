@@ -3649,4 +3649,20 @@ html {
   color: #9e9da8;
 }
 
+.error {
+  background-color: #f4f4f4;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error__content {
+  margin: 20px;
+}
+.error__content--btn {
+  margin: 20px auto;
+  height: 60px;
+  max-width: 250px;
+}
+
 /*# sourceMappingURL=style.css.map */

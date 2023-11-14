@@ -1,0 +1,15 @@
+.error {
+  background-color: #f4f4f4;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__content {
+    margin: 20px;
+  }
+  &__content--btn {
+    margin: 20px auto;
+    height: 60px;
+    max-width: 250px;
+  }
+}

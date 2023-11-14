@@ -138,9 +138,9 @@ export default function TotalProduct() {
   ];
   return (
     <>
-      <section class="home__container">
-        <div class="home__row">
-          <h2 class="home__heading">Xe lướt miền Trung</h2>
+      <section className="home__container">
+        <div className="home__row">
+          <h2 className="home__heading">Xe lướt miền Trung</h2>
           <Filter />
         </div>
         <div className="row row-cols-4 row-cols-lg-2 row-cols-sm-1 g-3">

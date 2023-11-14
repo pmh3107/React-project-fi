@@ -133,8 +133,8 @@ export default function Filter() {
   };
   return (
     <>
-      <div class="filter-wrap">
-        <button class="filter-btn js-toggle" onClick={toggleFilter}>
+      <div className="filter-wrap">
+        <button className="filter-btn js-toggle" onClick={toggleFilter}>
           Lọc
           <img src={FilterIcon} alt="" className="filter-btn__icon icon" />
         </button>

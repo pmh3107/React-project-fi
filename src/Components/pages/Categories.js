@@ -39,9 +39,9 @@ export default function Categories() {
         </div>
         <div className="home__cate row row-cols-2 row-cols-md-1">
           {categoryData.map((content, index) => (
-            <div className="col">
+            <div key={index} className="col">
               <a href="#!">
-                <article key={index} className="cate-item">
+                <article className="cate-item">
                   <img
                     src={content.srcImg}
                     alt=""
