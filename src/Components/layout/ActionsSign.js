@@ -17,7 +17,6 @@ export default function Sign() {
     <div className="top-act">
       {signInfo.map((item, index) => (
         <a key={index} className={item.className} href={item.link}>
-          {" "}
           {item.nameBtn}
         </a>
       ))}

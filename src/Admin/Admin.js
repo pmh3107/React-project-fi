@@ -2,7 +2,7 @@ import React from "react";
 function Admin() {
   return (
     <>
-      <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <nav class="admin">
         <a class="navbar-brand ps-3" href="index.html">
           Admin | Xe lướt miền Trung
         </a>
