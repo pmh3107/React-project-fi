@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./Components/Homepage";
 import HomePageAlreadySingIn from "./Components/HomePageAlreadySignIn";
@@ -11,6 +10,7 @@ import Admin from "./Admin/Admin";
 import Deposit from "./Components/Deposit";
 import Error404 from "./Components/Error";
 // import "../css/style.css";
+
 function App() {
   return (
     <Routes>

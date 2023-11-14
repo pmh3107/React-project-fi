@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LogoPrimary from "./commons/Logo";
 import IconBackground from "./assets/authImg/intro.svg";
 import EmailIcon from "./assets/icon/message.svg";
@@ -95,6 +95,9 @@ function BannerLeft() {
   );
 }
 export default function SignIn() {
+  useEffect(() => {
+    document.title = "Xe lướt miền Trung | Đăng ký";
+  }, []);
   return (
     <>
       <main className="auth">

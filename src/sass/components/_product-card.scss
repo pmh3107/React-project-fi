@@ -29,10 +29,12 @@
   }
 
   &__title {
+    font-weight: 500;
+    line-height: 150%;
+    font-size: 2rem;
     margin-top: 16px;
   }
 
-  &__title,
   &__price,
   &__score {
     font-size: 1.6rem;

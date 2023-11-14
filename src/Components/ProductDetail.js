@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderAlreadySingIn from "./layout/HeaderAlreadySignIn";
 import Footer from "./layout/Footer";
+import Product from "./pages/Product";
+
 import IconSearch from "./assets/icon/search.svg";
 import ArrowRight from "./assets/icon/arrow-right.svg";
 import Canival from "./assets/product/Canival.jpg";
 import Civic from "./assets/product/Civic.jpg";
 import LuxA from "./assets/product/LUX A.jpg";
 import Morning from "./assets/product/Morning.jpg";
-import Calendar from "./assets/icon/Calendar.svg";
-import Heart from "./assets/icon/heart.svg";
-import HeartRed from "./assets/icon/heart-red.svg";
+
 import AvatarCmt1 from "./assets/avatar/avatar-1.png";
 import AvatarCmt2 from "./assets/avatar/avatar-2.png";
 import AvatarCmt3 from "./assets/avatar/avatar-3.png";
@@ -199,7 +199,7 @@ function RateUser() {
 function Breadcrumbs() {
   const BreadcrumbsData = [
     {
-      name: "Ô tô hạng B",
+      name: "Sản phẩm",
       highlight: "",
     },
     {
@@ -236,11 +236,11 @@ function Breadcrumbs() {
   );
 }
 
-function Product() {
+function ProductSimilar() {
   const productData = [
     {
       srcImg: Canival,
-      title: "KIA CARNIVAL SIGNATURE 7S 2.2D",
+      title: "KIA CARNIVAL SIGNATURE",
       price: "1T 430tr",
       kmNumber: "2.000",
       year: "2023",
@@ -279,37 +279,16 @@ function Product() {
           Sản phẩm tương tự bạn có thể thích
         </h2>
         <div className="row row-cols-6 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3">
-          {productData.map((item, index) => (
-            <div className="col">
-              <article key={index} className="product-card">
-                <div className="product-card__img-wrap">
-                  <a href={item.link}>
-                    <img
-                      src={item.srcImg}
-                      alt=""
-                      className="product-card__thumb"
-                    />
-                  </a>
-                  <button className="like-btn product-card__like-btn">
-                    <img src={Heart} alt="" className="like-btn__icon icon" />
-                    <img
-                      src={HeartRed}
-                      alt=""
-                      className="like-btn__icon--liked"
-                    />
-                  </button>
-                </div>
-                <h3 className="product-card__title">
-                  <a href={item.link}>{item.title}</a>
-                </h3>
-                <p className="product-card__brand">{`Số km: ${item.kmNumber} km`}</p>
-                <div className="product-card__row">
-                  <span className="product-card__price">{item.price}</span>
-                  <img src={Calendar} alt="" className="product-card__year" />
-                  <span className="product-card__score">{item.year}</span>
-                </div>
-              </article>
-            </div>
+          {productData.map((content, index) => (
+            <Product
+              key={index}
+              srcImg={content.srcImg}
+              price={content.price}
+              title={content.title}
+              kmNumber={content.kmNumber}
+              year={content.year}
+              link={content.link}
+            />
           ))}
         </div>
       </div>
@@ -318,6 +297,9 @@ function Product() {
 }
 
 function ProductDetail() {
+  useEffect(() => {
+    document.title = "Xe lướt miền Trung Chi tiết sản phẩm ";
+  }, []);
   const [selectedTab, setSelectedTab] = useState(0);
 
   const tabNames = ["Mô tả", "Tính năng", "Đánh giá", "Tương tự"];
@@ -325,6 +307,7 @@ function ProductDetail() {
   const handleTabClick = (index) => {
     setSelectedTab(index);
   };
+
   return (
     <>
       <HeaderAlreadySingIn />
@@ -379,7 +362,7 @@ function ProductDetail() {
                 </ul>
                 <div className="prod-tab__contents">
                   {selectedTab === 2 ? <RateUser /> : null}
-                  {selectedTab === 3 ? <Product /> : null}
+                  {selectedTab === 3 ? <ProductSimilar /> : null}
                 </div>
               </div>
             </div>

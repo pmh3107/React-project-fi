@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LogoPrimary from "./commons/Logo";
 import IconBackground from "./assets/authImg/intro.svg";
 import EmailIcon from "./assets/icon/message.svg";
@@ -6,6 +6,9 @@ import IconError from "./assets/icon/form-error.svg";
 import LockIcon from "./assets/icon/lock.svg";
 
 function InputSign(props) {
+  useEffect(() => {
+    document.title = "Xe lướt miền Trung | Đăng nhập";
+  }, []);
   return (
     <div className="form__group">
       <div className="form__text-input">
@@ -72,10 +75,10 @@ function FormSignIn() {
         <button class="btn btn--primary auth__btn form__submit-btn">
           Đăng Nhập
         </button>
-        <button class="btn btn--outline auth__btn btn--no-margin">
+        <a href="/404" class="btn btn--outline auth__btn btn--no-margin">
           <img src="./assets/icons/google.svg" alt="" class="btn__icon icon" />
           Đăng nhập với google
-        </button>
+        </a>
       </div>
     </form>
   );

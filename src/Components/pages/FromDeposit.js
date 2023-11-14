@@ -81,7 +81,7 @@ export default function FromDeposit() {
                 htmlFor="card-holder"
                 className="form__label form__label--medium"
               >
-                Tên chủ thẻ
+                Họ và Tên
               </label>
               <div className="form__text-input">
                 <input
@@ -167,19 +167,19 @@ export default function FromDeposit() {
               <span>799 triệu</span>
             </div>
             <div className="cart-info__row">
-              <span>Số tiền đặt cọc</span>
-              <span>30 triệu</span>
+              <span>Số tiền đặt cọc (10% giá trị xe)</span>
+              <span>79,9 triệu</span>
             </div>
             <div className="cart-info__separate" />
             <div className="cart-info__row">
               <span>Số tiền cần thanh toán</span>
-              <span>30 triệu</span>
+              <span>79,9 triệu</span>
             </div>
             <button
               type="submit"
               className="cart-info__next-btn btn btn--primary btn--rounded"
             >
-              Thanh toán
+              Tiến hành đặt cọc
             </button>
           </form>
         </div>

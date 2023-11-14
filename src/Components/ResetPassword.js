@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LogoPrimary from "./commons/Logo";
 import IconBackground from "./assets/authImg/forgot-password.png";
 import IconError from "./assets/icon/form-error.svg";
 import EmailIcon from "./assets/icon/message.svg";
 
 function FormSignIn() {
+  useEffect(() => {
+    document.title = "Xe lướt miền Trung | Quên mật khẩu";
+  }, []);
   const [email, setEmail] = useState("");
   const [emailSent] = useState(false);
 

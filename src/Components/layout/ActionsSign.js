@@ -3,13 +3,13 @@ import React from "react";
 export default function Sign() {
   const signInfo = [
     {
-      link: "/signIn",
-      nameBtn: "Đăng nhập",
+      link: "/signUp",
+      nameBtn: "Đăng ký",
       className: "btn--text d-md-none",
     },
     {
-      link: "/signUp",
-      nameBtn: "Đăng ký",
+      link: "/signIn",
+      nameBtn: "Đăng nhập",
       className: "top-act__sign-up btn btn--primary",
     },
   ];

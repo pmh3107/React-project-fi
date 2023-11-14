@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Icon404 from "../Components/assets/icon/error404.svg";
 function Error404() {
+  useEffect(() => {
+    document.title = "Xe lướt miền Trung | Lỗi 404";
+  }, []);
   return (
     <main className="error">
       <div className="error__container">
