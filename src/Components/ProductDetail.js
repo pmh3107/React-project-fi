@@ -67,7 +67,7 @@ function DetailCar() {
     registry: "31/12/2023",
     carHanding: "2 - 4",
     installment: "40",
-    price: "799 triệu",
+    price: 799,
   };
   return (
     <div className="col-7 col-xl-6 col-lg-12">
@@ -126,7 +126,7 @@ function DetailCar() {
                     </span>
                     <span className="prod-info__tax">Lãi xuất 1%</span>
                   </div>
-                  <p className="prod-info__total-price">{carData.price}</p>
+                  <p className="prod-info__total-price">{`${carData.price} triệu`}</p>
                   <div className="prod-info__row">
                     <a
                       href="/deposit"
