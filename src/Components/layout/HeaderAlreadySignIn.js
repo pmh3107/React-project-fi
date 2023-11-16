@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import IconTheme from "./SetupTheme";
 import LogoLink from "../commons/Logo";
 import DropDown from "./Dropdown";
 
@@ -100,6 +100,7 @@ function Header() {
           />
           <Navbar />
           <AlreadySingIn />
+          <IconTheme />
         </div>
       </div>
     </header>

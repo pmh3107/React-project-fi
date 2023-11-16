@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import IconTheme from "./SetupTheme";
 import { Link } from "react-router-dom";
+
 import LogoLink from "../commons/Logo";
 import DropDown from "./Dropdown";
 import ActionSign from "./ActionsSign";
@@ -7,9 +9,6 @@ import ArrowDown from "../assets/icon/arrow-down.svg";
 import More from "../assets/icon/more.svg";
 import Exit from "../assets/icon/exit.svg";
 
-function iconTheme() {
-  
-}
 function NavbarItem({ link, name, hasDropdown = false }) {
   return (
     <li className="navbar__item">
@@ -71,6 +70,7 @@ function Header() {
           />
           <Navbar />
           <ActionSign />
+          <IconTheme />
         </div>
       </div>
     </header>

@@ -83,6 +83,11 @@ html {
 
   // Review card
   --review-card-bg: #fafafd;
+
+  @include abstracts.screen(md) {
+    --review-card-bg: #fff;
+  }
+
   // Checkout
   --checkout-breadcrumbs-bg: #fff;
   --checkout-cart-info-bg: #fff;

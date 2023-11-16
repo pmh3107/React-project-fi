@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HeaderAlreadySingIn from "./layout/HeaderAlreadySignIn";
+import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import Product from "./pages/Product";
 
@@ -18,11 +18,23 @@ import Civic1 from "./assets/product/civic-1.jpg";
 import Civic2 from "./assets/product/civic-2.jpg";
 import Civic3 from "./assets/product/civic-3.jpg";
 
+// Link web mô tả bằng iframe
+function Describer() {
+  return (
+    <>
+      <iframe
+        title="web mô tả"
+        src="https://hondagiaiphong.net/xe-oto-honda/182-thong-so-ky-thuat-xe-honda-civic-tai-viet-nam.html"
+        className="prod-tab__iframe"
+      />
+    </>
+  );
+}
+
 function DetailCarImg() {
   const images = [Civic, Civic1, Civic2, Civic3];
-
+  // Xử lý hình ảnh
   const [currentImage, setCurrentImage] = useState(images[0]);
-
   const handleImageClick = (image) => {
     setCurrentImage(image);
   };
@@ -31,15 +43,9 @@ function DetailCarImg() {
     <div className="col-5 col-xl-6 col-lg-12">
       <div className="prod-preview">
         <div className="prod-preview__list">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className="prod-preview__item"
-              onClick={() => handleImageClick(image)}
-            >
-              <img src={image} alt="" className="prod-preview__img" />
-            </div>
-          ))}
+          <div className="prod-preview__item">
+            <img src={currentImage} alt="" className="prod-preview__img" />
+          </div>
         </div>
         <div className="prod-preview__thumbs">
           {images.map((image, index) => (
@@ -48,10 +54,9 @@ function DetailCarImg() {
               src={image}
               alt=""
               className={`prod-preview__thumb-img ${
-                currentImage === images
-                  ? "prod-preview__thumb-img--current"
-                  : ""
+                currentImage === image ? "prod-preview__thumb-img--current" : ""
               }`}
+              onClick={() => handleImageClick(image)}
             />
           ))}
         </div>
@@ -166,8 +171,9 @@ function RateUser() {
     <div className="prod-tab__content--current">
       <div className="prod-content">
         <h2 className="prod-content__heading">Đánh giá từ người dùng</h2>
-        <div className="row row-cols-3">
+        <div className="row row-cols-3 gx-lg-2 row-cols-md-1 gy-md-3">
           {/* Review card 1 */}
+
           {commentUser.map((content, index) => (
             <div className="col">
               <div className="review-card">
@@ -297,76 +303,72 @@ function ProductDetail() {
   useEffect(() => {
     document.title = "Xe lướt miền Trung Chi tiết sản phẩm ";
   }, []);
+  //xử lý thanh trạng thái
   const [selectedTab, setSelectedTab] = useState(0);
-
-  const tabNames = ["Mô tả", "Tính năng", "Đánh giá", "Tương tự"];
-
+  const tabNames = ["Mô tả", "Đánh giá", "Tương tự"];
   const handleTabClick = (index) => {
     setSelectedTab(index);
   };
 
   return (
     <>
-      <HeaderAlreadySingIn />
-      <>
-        {/* MAIN */}
-        <main className="product-page">
-          <div className="container">
-            {/* Search bar */}
-            <div className="product-container">
-              <div className="search-bar d-none d-md-flex">
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="Search for item"
-                  className="search-bar__input"
+      <Header />
+      {/* MAIN */}
+      <main className="product-page">
+        <div className="container">
+          {/* Search bar */}
+          <div className="product-container">
+            <div className="search-bar d-none d-md-flex">
+              <input
+                type="text"
+                name=""
+                id=""
+                placeholder="Search for item"
+                className="search-bar__input"
+              />
+              <button className="search-bar__submit">
+                <img
+                  src={IconSearch}
+                  alt=""
+                  className="search-bar__icon icon"
                 />
-                <button className="search-bar__submit">
-                  <img
-                    src={IconSearch}
-                    alt=""
-                    className="search-bar__icon icon"
-                  />
-                </button>
-              </div>
+              </button>
             </div>
-            {/* Breadcrumbs */}
-            <Breadcrumbs />
-            {/* Product info */}
-            <div className="product-container prod-info-content">
-              <div className="row">
-                <DetailCarImg />
-
-                <DetailCar />
-              </div>
+          </div>
+          {/* Breadcrumbs */}
+          <Breadcrumbs />
+          {/* Product info */}
+          <div className="product-container prod-info-content">
+            <div className="row">
+              <DetailCarImg />
+              <DetailCar />
             </div>
-            {/* Product content */}
-            <div className="product-container">
-              <div className="prod-tab">
-                <ul className="prod-tab__list">
-                  {tabNames.map((tabName, index) => (
-                    <li
-                      key={index}
-                      className={`prod-tab__item ${
-                        index === selectedTab ? "prod-tab__item--current" : ""
-                      }`}
-                      onClick={() => handleTabClick(index)}
-                    >
-                      {tabName}
-                    </li>
-                  ))}
-                </ul>
-                <div className="prod-tab__contents">
-                  {selectedTab === 2 ? <RateUser /> : null}
-                  {selectedTab === 3 ? <ProductSimilar /> : null}
-                </div>
+          </div>
+          {/* Product content */}
+          <div className="product-container">
+            <div className="prod-tab">
+              <ul className="prod-tab__list">
+                {tabNames.map((tabName, index) => (
+                  <li
+                    key={index}
+                    className={`prod-tab__item ${
+                      index === selectedTab ? "prod-tab__item--current" : ""
+                    }`}
+                    onClick={() => handleTabClick(index)}
+                  >
+                    {tabName}
+                  </li>
+                ))}
+              </ul>
+              <div className="prod-tab__contents">
+                {selectedTab === 0 ? <Describer /> : null}
+                {selectedTab === 1 ? <RateUser /> : null}
+                {selectedTab === 2 ? <ProductSimilar /> : null}
               </div>
             </div>
           </div>
-        </main>
-      </>
-
+        </div>
+      </main>
       <Footer />
     </>
   );

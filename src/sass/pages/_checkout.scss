@@ -46,7 +46,16 @@
       line-height: 145.455%;
     }
   }
+  &__content {
+    padding: 10px 0;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 145.455%;
 
+    &--hl {
+      font-weight: 600 !important;
+    }
+  }
   &__sub-heading {
     margin: 30px 0;
     font-size: 1.8rem;
@@ -141,7 +150,11 @@
     font-size: 1.8rem;
     line-height: 144.444%;
   }
-
+  &__sent {
+    height: 60px;
+    margin: 30px 0 0;
+    min-width: 200px;
+  }
   &__checkbox {
     &-input {
       appearance: none;

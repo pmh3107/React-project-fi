@@ -36,7 +36,9 @@ $error-color: #ed4337;
       display: none;
     }
   }
-
+  &__text-area-input {
+    min-height: 100px;
+  }
   &__text-input {
     display: flex;
     align-items: center;
@@ -68,6 +70,7 @@ $error-color: #ed4337;
     }
     &--textarea {
       background-color: transparent;
+      height: 100%;
     }
     &::placeholder {
       color: var(--form-placeholder-color);
