@@ -67,6 +67,7 @@ function DetailCar() {
     registry: "31/12/2023",
     carHanding: "2 - 4",
     installment: "40",
+    kmTraveled: 7000,
     price: 799,
   };
   return (
@@ -77,11 +78,7 @@ function DetailCar() {
           <div className="row">
             <div className="col-5 col-xxl-6 col-xl-12">
               <div className="prod-prop">
-                <img
-                  src="./assets/icons/star.svg"
-                  alt=""
-                  className="prod-prop__icon"
-                />
+                <h4 className="prod-prop__title">{`Số km đã đi: ${carData.kmTraveled} km`}</h4>
                 <h4 className="prod-prop__title">{`Năm sản xuất: ${carData.year}`}</h4>
               </div>
               <label htmlFor="" className="form__label prod-info__label">

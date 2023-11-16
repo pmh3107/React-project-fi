@@ -196,8 +196,8 @@
 
 .prod-prop {
   display: flex;
-
-  gap: 16px;
+  flex-direction: column;
+  gap: 14px;
   margin-top: 30px;
 
   &__icon {

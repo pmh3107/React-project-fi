@@ -7,6 +7,9 @@ import ArrowDown from "../assets/icon/arrow-down.svg";
 import More from "../assets/icon/more.svg";
 import Exit from "../assets/icon/exit.svg";
 
+function iconTheme() {
+  
+}
 function NavbarItem({ link, name, hasDropdown = false }) {
   return (
     <li className="navbar__item">
