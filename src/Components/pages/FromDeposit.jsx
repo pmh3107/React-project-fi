@@ -3,7 +3,8 @@ import { useState } from "react";
 import { format, isAfter } from "date-fns";
 import Civic from "../assets/product/Civic.jpg";
 import ErrorIcon from "../assets/icon/form-error.svg";
-
+import { ref, child, set } from "firebase/database";
+import { database } from "../../Firebase";
 function InfoCarDeposit(props) {
   return (
     <div className="col-4 col-xl-12">
@@ -51,6 +52,11 @@ export default function FromDeposit() {
     installment: "40",
     price: 799,
   };
+  // Tính phí đặt cọc
+  const cashDeposit = (value) => {
+    const cash = value * 0.05;
+    return cash;
+  };
   // hàm lấy dữ liệu từ form
   const [formData, setFormData] = useState({
     email: "",
@@ -58,10 +64,7 @@ export default function FromDeposit() {
     dayPickUp: "",
     note: "",
   });
-  const cashDeposit = (value) => {
-    const cash = value * 0.05;
-    return cash;
-  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -71,24 +74,22 @@ export default function FromDeposit() {
     e.preventDefault();
     console.log(formData);
     try {
-      const response = await fetch("/api/deposit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const dbRef = ref(database);
+
+      // Set dữ liệu vào Firebase
+      set(child(dbRef, `deposit`), {
+        [carData.name]: {
+          name: formData.name,
+          email: formData.email,
+          dayPickUp: formData.dayPickUp,
+          note: formData.note,
         },
-        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        // Handle success (optional)
-        console.log("Form data sent successfully");
-      } else {
-        console.error("Form data submission failed");
-        window.location.href = "/404";
-        // Handle error
-      }
+      console.log("Form data set successfully");
     } catch (error) {
       console.error("An error occurred:", error);
+      // Handle error
     }
   };
   // Hàm xử lý ngày tháng năm
@@ -99,7 +100,6 @@ export default function FromDeposit() {
   const handleChange = (event) => {
     const dateValue = event.target.value;
     const currentDate = format(new Date(), "yyyy-MM-dd");
-
     if (isAfter(new Date(dateValue), new Date(currentDate))) {
       setFormData({ ...formData, dayPickUp: dateValue });
       setSelectedDate(dateValue);
