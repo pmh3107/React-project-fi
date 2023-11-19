@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import Product from "./pages/Product";
@@ -66,25 +67,23 @@ function DetailCarImg() {
 }
 
 function DetailCar() {
-  const carData = {
-    name: "HONDA CIVIC RS",
-    year: "2021",
-    registry: "31/12/2023",
-    carHanding: "2 - 4",
-    installment: "40",
-    kmTraveled: 7000,
-    price: 799,
-  };
+  const location = useLocation();
+  const productData = location.state && location.state.productData;
+  console.log(productData);
+  if (!productData) {
+    // Xử lý khi không có dữ liệu sản phẩm
+    return <div>Không có dữ liệu sản phẩm.</div>;
+  }
   return (
     <div className="col-7 col-xl-6 col-lg-12">
       <form action="" className="form">
         <section className="prod-info">
-          <h1 className="prod-info__heading">{carData.name}</h1>
+          <h1 className="prod-info__heading">{productData.name}</h1>
           <div className="row">
             <div className="col-5 col-xxl-6 col-xl-12">
               <div className="prod-prop">
-                <h4 className="prod-prop__title">{`Số km đã đi: ${carData.kmTraveled} km`}</h4>
-                <h4 className="prod-prop__title">{`Năm sản xuất: ${carData.year}`}</h4>
+                <h4 className="prod-prop__title">{`Số km đã đi: ${productData.kmTraveled} km`}</h4>
+                <h4 className="prod-prop__title">{`Năm sản xuất: ${productData.year}`}</h4>
               </div>
               <label htmlFor="" className="form__label prod-info__label">
                 Gói bảo hành
@@ -107,7 +106,7 @@ function DetailCar() {
                   />
                   <div>
                     <h4 className="prod-prop__title">Thời hạn đăng kiểm</h4>
-                    <p className="prod-prop__desc">{carData.registry}</p>
+                    <p className="prod-prop__desc">{productData.register}</p>
                   </div>
                 </div>
                 <div className="prod-prop">
@@ -118,17 +117,17 @@ function DetailCar() {
                   />
                   <div>
                     <h4 className="prod-prop__title">Giao xe tận nơi</h4>
-                    <p className="prod-prop__desc">{`Từ ${carData.carHanding} ngày làm việc`}</p>
+                    <p className="prod-prop__desc">{`Từ 4 - 6 ngày làm việc`}</p>
                   </div>
                 </div>
                 <div className="prod-info__card">
                   <div className="prod-info__row">
                     <span className="prod-info__price">
-                      {`Trả góp: ${carData.installment} triệu/tháng`}
+                      {`Trả góp: 40 triệu/tháng`}
                     </span>
                     <span className="prod-info__tax">Lãi xuất 1%</span>
                   </div>
-                  <p className="prod-info__total-price">{`${carData.price} triệu`}</p>
+                  <p className="prod-info__total-price">{`${productData.price} triệu`}</p>
                   <div className="prod-info__row">
                     <a
                       href="/deposit"
@@ -301,7 +300,7 @@ function ProductSimilar() {
 
 function ProductDetail() {
   useEffect(() => {
-    document.title = "Xe lướt miền Trung Chi tiết sản phẩm ";
+    document.title = "Xe lướt miền Trung | Chi tiết sản phẩm ";
   }, []);
   //xử lý thanh trạng thái
   const [selectedTab, setSelectedTab] = useState(0);
@@ -309,7 +308,6 @@ function ProductDetail() {
   const handleTabClick = (index) => {
     setSelectedTab(index);
   };
-
   return (
     <>
       <Header />

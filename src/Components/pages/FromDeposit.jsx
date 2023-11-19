@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { format, isAfter } from "date-fns";
-import Civic from "../assets/product/Civic.jpg";
+
 import ErrorIcon from "../assets/icon/form-error.svg";
 import { ref, child, set } from "firebase/database";
 import { database } from "../../Firebase";
@@ -43,7 +43,7 @@ function InfoCarDeposit(props) {
 export default function FromDeposit() {
   // Dữ liệu thông tin xe
   const carData = {
-    Img: Civic,
+    Img: "https://firebasestorage.googleapis.com/v0/b/project-uth-fi.appspot.com/o/ImagesHondaCivic%2FCivic.jpg?alt=media&token=1f7be713-106a-4312-8c25-8a40ffb7c30b",
     name: "HONDA CIVIC RS",
     year: "2021",
     registry: "31/12/2023",
@@ -52,6 +52,7 @@ export default function FromDeposit() {
     installment: "40",
     price: 799,
   };
+
   // Tính phí đặt cọc
   const cashDeposit = (value) => {
     const cash = value * 0.05;
