@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Filter from "./Filter";
 import Product from "./Product";
 import { db } from "../../Firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 function TotalProduct() {
@@ -15,30 +15,30 @@ function TotalProduct() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const getData = async (brand, model, id) => {
-          const docRef = doc(db, brand, model);
-          const docSnap = await getDoc(docRef);
-          return docSnap.exists() ? { ...docSnap.data(), id } : null;
-        };
+        // lấy tất cả documents trong collection "cars"
+        const carsCollectionRef = collection(db, "cars");
+        const querySnapshot = await getDocs(carsCollectionRef);
 
-        const [dataHonda, dataKIA, dataKIAMN, dataVINA] = await Promise.all([
-          getData("HONDA", "HONDA CIVIC RS", "hondaCivic"),
-          getData("KIA", "KIA CARNIVAL", "kiaCarnival"),
-          getData("KIA", "KIA MORNING MT", "kiaMorning"),
-          getData("VINFAST", "VINFAST LUX A 2.0 PLUS", "vinLuxA"),
-        ]);
+        const carDataArray = [];
 
-        if (dataHonda && dataKIA && dataKIAMN && dataVINA) {
-          const combinedData = [dataHonda, dataKIA, dataKIAMN, dataVINA];
-          setCarData(combinedData);
+        // Lặp qua từng document trong collection và lấy dữ liệu
+        querySnapshot.forEach((doc) => {
+          const carData = { ...doc.data(), id: doc.id };
+          carDataArray.push(carData);
+        });
+
+        // Kiểm tra xem có dữ liệu hay không trước khi cập nhật state
+        if (carDataArray.length > 0) {
+          setCarData(carDataArray);
+          console.log("Upload data form cars successfully");
         } else {
-          console.log("One or both documents do not exist!");
+          console.log("No documents found in the 'cars' collection!");
         }
       } catch (error) {
-        console.error("Error getting document:", error);
+        console.error("Error getting documents:", error);
       }
     };
-
+    // Gọi hàm để lấy dữ liệu
     fetchData();
   }, []);
   return (

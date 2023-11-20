@@ -5,7 +5,7 @@ import ContactPage from "./Components/ContactPage";
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
 import ResetPassWord from "./Components/ResetPassword";
-import ProductDetail from "./Components/ProductDetail";
+import ProductDetailTotal from "./Components/ProductDetailTotal";
 import Admin from "./Admin/Admin";
 import Deposit from "./Components/Deposit";
 import Error404 from "./Components/Error";
@@ -20,7 +20,7 @@ function App() {
       <Route path="/signIn" element={<SignIn />} />
       <Route path="/signUp" element={<SignUp />} />
       <Route path="/resetPass" element={<ResetPassWord />} />
-      <Route path="/product/:productID" element={<ProductDetail />} />
+      <Route path="/product/:productID" element={<ProductDetailTotal />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/deposit" element={<Deposit />} />
       <Route path="/404" element={<Error404 />} />

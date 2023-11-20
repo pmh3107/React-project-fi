@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { db } from "../Firebase";
-import { doc, getDoc } from "firebase/firestore";
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
-import Product from "./pages/Product";
+import { db } from "../../Firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import Product from "./Product";
 
-import IconSearch from "./assets/icon/search.svg";
-import ArrowRight from "./assets/icon/arrow-right.svg";
+import IconSearch from "../assets/icon/search.svg";
+import ArrowRight from "../assets/icon/arrow-right.svg";
 
-import AvatarCmt1 from "./assets/avatar/avatar-1.png";
-import AvatarCmt2 from "./assets/avatar/avatar-2.png";
-import AvatarCmt3 from "./assets/avatar/avatar-3.png";
+import AvatarCmt1 from "../assets/avatar/avatar-1.png";
+import AvatarCmt2 from "../assets/avatar/avatar-2.png";
+import AvatarCmt3 from "../assets/avatar/avatar-3.png";
 
 // Link web mô tả bằng iframe
 function Describer() {
@@ -26,45 +24,7 @@ function Describer() {
   );
 }
 
-// function DetailCarImg(imagesCar) {
-//   const images = [imagesCar];
-//   console.log(images);
-//   // Xử lý hình ảnh
-//   const [currentImage, setCurrentImage] = useState(images[0]);
-//   const handleImageClick = (image) => {
-//     setCurrentImage(image);
-//   };
-
-//   return (
-//     <div className="col-5 col-xl-6 col-lg-12">
-//       <div className="prod-preview">
-//         <div className="prod-preview__list">
-//           <div className="prod-preview__item">
-//             <img src={currentImage} alt="" className="prod-preview__img" />
-//           </div>
-//         </div>
-//         <div className="prod-preview__thumbs">
-//           {images.map((image, index) => (
-//             <img
-//               key={index}
-//               src={image}
-//               alt=""
-//               className={`prod-preview__thumb-img ${
-//                 currentImage === image ? "prod-preview__thumb-img--current" : ""
-//               }`}
-//               onClick={() => handleImageClick(image)}
-//             />
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-function DetailCar() {
-  const location = useLocation();
-  const productData = location.state && location.state.productData;
-  console.log(productData);
+function DetailCarImg({ productData }) {
   const images = [
     productData.img,
     productData.img1,
@@ -76,24 +36,36 @@ function DetailCar() {
   const handleImageClick = (image) => {
     setCurrentImage(image);
   };
-  // console.log(imgCar);
-  // xử lý breakcrumb
-  const BreadcrumbsData = [
-    {
-      name: "SẢN PHẨM",
-      highlight: "",
-    },
-    {
-      name: productData.brand,
-      highlight: "",
-    },
-    {
-      name: productData.name,
-    },
-  ];
+
+  return (
+    <div className="col-5 col-xl-6 col-lg-12">
+      <div className="prod-preview">
+        <div className="prod-preview__list">
+          <div className="prod-preview__item">
+            <img src={currentImage} alt="" className="prod-preview__img" />
+          </div>
+        </div>
+        <div className="prod-preview__thumbs">
+          {images.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt=""
+              className={`prod-preview__thumb-img ${
+                currentImage === image ? "prod-preview__thumb-img--current" : ""
+              }`}
+              onClick={() => handleImageClick(image)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DetailCar({ productData }) {
   const navigate = useNavigate();
   const handleDepositClick = () => {
-    console.log(productData);
     navigate(`/deposit`, {
       state: { productData: productData },
     });
@@ -104,58 +76,11 @@ function DetailCar() {
   }
   return (
     <>
-      <div className="product-container">
-        <ul className="breadcrumbs">
-          {BreadcrumbsData.map((content, index) => (
-            <li key={index}>
-              <a
-                href="/"
-                className={`breadcrumbs__link ${content.highlight} ${
-                  index === BreadcrumbsData.length - 1
-                    ? "breadcrumbs__link--current"
-                    : ""
-                }`}
-              >
-                {content.name}
-                {index === BreadcrumbsData.length - 1 ? null : (
-                  <img src={ArrowRight} alt="" />
-                )}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Breadcrumbs productData={productData} />
       {/* Product info */}
       <div className="product-container prod-info-content">
         <div className="row">
-          <div className="col-5 col-xl-6 col-lg-12">
-            <div className="prod-preview">
-              <div className="prod-preview__list">
-                <div className="prod-preview__item">
-                  <img
-                    src={currentImage}
-                    alt=""
-                    className="prod-preview__img"
-                  />
-                </div>
-              </div>
-              <div className="prod-preview__thumbs">
-                {images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt=""
-                    className={`prod-preview__thumb-img ${
-                      currentImage === image
-                        ? "prod-preview__thumb-img--current"
-                        : ""
-                    }`}
-                    onClick={() => handleImageClick(image)}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
+          <DetailCarImg productData={productData} />
           <div className="col-7 col-xl-6 col-lg-12">
             <form action="" className="form">
               <section className="prod-info">
@@ -292,33 +217,44 @@ function RateUser() {
     </div>
   );
 }
-// function Breadcrumbs(BreadcrumbsData) {
-//   return (
-//     <div className="product-container">
-//       <ul className="breadcrumbs">
-//         {BreadcrumbsData.map((content, index) => (
-//           <li key={index}>
-//             <a
-//               href="#!"
-//               className={`breadcrumbs__link ${content.highlight} ${
-//                 index === BreadcrumbsData.length - 1
-//                   ? "breadcrumbs__link--current"
-//                   : ""
-//               }`}
-//             >
-//               {content.name}
-//               {index === BreadcrumbsData.length - 1 ? null : (
-//                 <img src={ArrowRight} alt="" />
-//               )}
-//             </a>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
+function Breadcrumbs({ productData }) {
+  const BreadcrumbsData = [
+    {
+      name: "SẢN PHẨM",
+    },
+    {
+      name: productData.brand,
+    },
+    {
+      name: productData.name,
+    },
+  ];
+  return (
+    <div className="product-container">
+      <ul className="breadcrumbs">
+        {BreadcrumbsData.map((content, index) => (
+          <li key={index}>
+            <a
+              href="#!"
+              className={`breadcrumbs__link ${content.highlight} ${
+                index === BreadcrumbsData.length - 1
+                  ? "breadcrumbs__link--current"
+                  : ""
+              }`}
+            >
+              {content.name}
+              {index === BreadcrumbsData.length - 1 ? null : (
+                <img src={ArrowRight} alt="" />
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
-function ProductSimilar() {
+function ProductSimilar({ productData }) {
   const navigate = useNavigate();
   const handleClick = (data) => {
     navigate(`/product/${data.id}`, { state: { productData: data } });
@@ -327,32 +263,35 @@ function ProductSimilar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const getData = async (brand, model, id) => {
-          const docRef = doc(db, brand, model);
-          const docSnap = await getDoc(docRef);
-          return docSnap.exists() ? { ...docSnap.data(), id } : null;
-        };
+        // lấy tất cả documents trong collection "cars"
+        const carsCollectionRef = collection(db, "cars");
+        const q = query(
+          carsCollectionRef,
+          where("brand", "==", productData.brand)
+        );
+        const querySnapshot = await getDocs(q);
+        const carDataArray = [];
 
-        const [dataHonda, dataKIA, dataKIAMN, dataVINA] = await Promise.all([
-          getData("HONDA", "HONDA CIVIC RS", "hondaCivic"),
-          getData("KIA", "KIA CARNIVAL", "kiaCarnival"),
-          getData("KIA", "KIA MORNING MT", "kiaMorning"),
-          getData("VINFAST", "VINFAST LUX A 2.0 PLUS", "vinLuxA"),
-        ]);
+        // Lặp qua từng document trong collection và lấy dữ liệu
+        querySnapshot.forEach((doc) => {
+          const carData = { ...doc.data(), id: doc.id };
+          carDataArray.push(carData);
+        });
 
-        if (dataHonda && dataKIA && dataKIAMN && dataVINA) {
-          const combinedData = [dataHonda, dataKIA, dataKIAMN, dataVINA];
-          setCarData(combinedData);
+        // Kiểm tra xem có dữ liệu hay không trước khi cập nhật state
+        if (carDataArray.length > 0) {
+          setCarData(carDataArray);
+          console.log("Upload data form cars successfully");
         } else {
-          console.log("One or both documents do not exist!");
+          console.log("No documents found in the 'cars' collection!");
         }
       } catch (error) {
-        console.error("Error getting document:", error);
+        console.error("Error getting documents:", error);
       }
     };
-
+    // Gọi hàm để lấy dữ liệu
     fetchData();
-  }, []);
+  }, [productData.brand]);
   return (
     <div className="prod-tab__content prod-tab__content--current">
       <div className="prod-content">
@@ -378,6 +317,8 @@ function ProductSimilar() {
 }
 
 function ProductDetail() {
+  const location = useLocation();
+  const productData = location.state && location.state.productData;
   useEffect(() => {
     document.title = "Xe lướt miền Trung | Chi tiết sản phẩm ";
   }, []);
@@ -389,7 +330,6 @@ function ProductDetail() {
   };
   return (
     <>
-      <Header />
       {/* MAIN */}
       <main className="product-page">
         <div className="container">
@@ -413,7 +353,7 @@ function ProductDetail() {
             </div>
           </div>
           {/* Product info */}
-          <DetailCar />
+          <DetailCar productData={productData} />
           {/* Product content */}
           <div className="product-container">
             <div className="prod-tab">
@@ -433,13 +373,14 @@ function ProductDetail() {
               <div className="prod-tab__contents">
                 {selectedTab === 0 ? <Describer /> : null}
                 {selectedTab === 1 ? <RateUser /> : null}
-                {selectedTab === 2 ? <ProductSimilar /> : null}
+                {selectedTab === 2 ? (
+                  <ProductSimilar productData={productData} />
+                ) : null}
               </div>
             </div>
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }
