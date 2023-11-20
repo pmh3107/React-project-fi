@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { format, isAfter } from "date-fns";
-
+import { useLocation } from "react-router";
 import ErrorIcon from "../assets/icon/form-error.svg";
-import { ref, child, set } from "firebase/database";
-import { database } from "../../Firebase";
+// import { ref, child, set } from "firebase/database";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../Firebase";
 function InfoCarDeposit(props) {
   return (
     <div className="col-4 col-xl-12">
@@ -42,21 +43,13 @@ function InfoCarDeposit(props) {
 }
 export default function FromDeposit() {
   // Dữ liệu thông tin xe
-  const carData = {
-    Img: "https://firebasestorage.googleapis.com/v0/b/project-uth-fi.appspot.com/o/ImagesHondaCivic%2FCivic.jpg?alt=media&token=1f7be713-106a-4312-8c25-8a40ffb7c30b",
-    name: "HONDA CIVIC RS",
-    year: "2021",
-    registry: "31/12/2023",
-    carHanding: "2 - 4",
-    kmTraveled: 7000,
-    installment: "40",
-    price: 799,
-  };
-
+  const location = useLocation();
+  const productData = location.state && location.state.productData;
   // Tính phí đặt cọc
   const cashDeposit = (value) => {
     const cash = value * 0.05;
-    return cash;
+    const roundedCash = cash.toFixed(2);
+    return roundedCash;
   };
   // hàm lấy dữ liệu từ form
   const [formData, setFormData] = useState({
@@ -73,13 +66,12 @@ export default function FromDeposit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const carDataCollection = collection(db, "DEPOSIT");
+    const carDocRef = doc(carDataCollection, productData.name);
     try {
-      const dbRef = ref(database);
-
       // Set dữ liệu vào Firebase
-      set(child(dbRef, `deposit`), {
-        [carData.name]: {
+      await setDoc(carDocRef, {
+        [productData.id]: {
           name: formData.name,
           email: formData.email,
           dayPickUp: formData.dayPickUp,
@@ -116,11 +108,11 @@ export default function FromDeposit() {
         <div className="checkout-container">
           <div className="row gy-xl-3">
             <InfoCarDeposit
-              carImg={carData.Img}
-              carName={carData.name}
-              carYear={carData.year}
-              carKmTraveled={carData.kmTraveled}
-              carRegistry={carData.registry}
+              carImg={productData.img}
+              carName={productData.name}
+              carYear={productData.year}
+              carKmTraveled={productData.kmTraveled}
+              carRegistry={productData.register}
             />
             <div className="col-8 col-xl-12">
               <div className="cart-info">
@@ -209,7 +201,7 @@ export default function FromDeposit() {
                   </div>
                   <div className="cart-info__row">
                     <span>Giá tiền xe</span>
-                    <span>{carData.price} triệu</span>
+                    <span>{productData.price} triệu</span>
                   </div>
                   <div className="cart-info__row">
                     <span>
@@ -218,12 +210,12 @@ export default function FromDeposit() {
                         (10% giá trị xe)
                       </span>
                     </span>
-                    <span>{cashDeposit(carData.price)} triệu</span>
+                    <span>{cashDeposit(productData.price)} triệu</span>
                   </div>
                   <div className="cart-info__separate" />
                   <div className="cart-info__row">
                     <span>Số tiền phải thanh toán</span>
-                    <span>{cashDeposit(carData.price)} triệu</span>
+                    <span>{cashDeposit(productData.price)} triệu</span>
                   </div>
                   <button
                     type="submit"
