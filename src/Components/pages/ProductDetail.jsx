@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { db } from "../../Firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import Product from "./Product";
-
-import IconSearch from "../assets/icon/search.svg";
 import ArrowRight from "../assets/icon/arrow-right.svg";
 
 import AvatarCmt1 from "../assets/avatar/avatar-1.png";
@@ -351,25 +349,6 @@ function ProductDetail() {
       {/* MAIN */}
       <main className="product-page">
         <div className="container">
-          {/* Search bar */}
-          <div className="product-container">
-            <div className="search-bar d-none d-md-flex">
-              <input
-                type="text"
-                name=""
-                id=""
-                placeholder="Search for item"
-                className="search-bar__input"
-              />
-              <button className="search-bar__submit">
-                <img
-                  src={IconSearch}
-                  alt=""
-                  className="search-bar__icon icon"
-                />
-              </button>
-            </div>
-          </div>
           {/* Product info */}
           <DetailCar productData={productData} />
           {/* Product content */}

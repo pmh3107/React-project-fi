@@ -34,5 +34,9 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
+    @include abstracts.screen(md) {
+      gap: 30px;
+      flex-direction: column;
+    }
   }
 }
