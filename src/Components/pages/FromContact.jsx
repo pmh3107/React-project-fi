@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import ErrorIcon from "../assets/icon/form-error.svg";
-
+import { collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../Firebase";
 function InfoShowroom() {
   return (
     <div className="col-6 col-xl-12">
@@ -38,11 +39,8 @@ function InfoShowroom() {
         </h2>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1647.3751890854862!2d106.72329694010992!3d10.876909622646657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527eea816e5e3%3A0x8543533e554df880!2zQ2h1bmcgQ8awIEZyZXNjYSBSaXZlciBTaWRlIFRo4bunIMSQ4bupYw!5e0!3m2!1svi!2s!4v1700125382276!5m2!1svi!2s"
-          width="600"
-          height="450"
-          allowfullscreen=""
+          className="cart-info__iframe"
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
           title="Địa chỉ showroom"
         ></iframe>
       </div>
@@ -53,8 +51,9 @@ function InfoShowroom() {
 export default function FromContact() {
   // hàm lấy dữ liệu từ form
   const [formData, setFormData] = useState({
-    email: "",
     name: "",
+    email: "",
+    phone: "",
     address: "",
     title: "",
     content: "",
@@ -66,26 +65,21 @@ export default function FromContact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const carDataCollection = collection(db, "CONTACT");
+    const carDocRef = doc(carDataCollection, formData.name);
     try {
-      const response = await fetch("/api/deposit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      await setDoc(carDocRef, {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        title: formData.title,
+        content: formData.content,
       });
-
-      if (response.ok) {
-        // Handle success (optional)
-        console.log("Form data sent successfully");
-      } else {
-        console.error("Form data submission failed");
-        window.location.href = "/404";
-        // Handle error
-      }
+      alert("Form data set successfully");
     } catch (error) {
       console.error("An error occurred:", error);
+      // Handle error
     }
   };
 
@@ -110,6 +104,22 @@ export default function FromContact() {
                   onSubmit={handleSubmit}
                 >
                   <div className="form__group">
+                    <label htmlFor="card-holder" className="form__label">
+                      Họ và tên
+                    </label>
+                    <div className="form__text-input">
+                      <input
+                        onChange={handleInputChange}
+                        type="text"
+                        name="name"
+                        id="card-holder"
+                        placeholder="Name"
+                        className="form__input"
+                        required=""
+                      />
+                    </div>
+                  </div>
+                  <div className="form__group">
                     <label htmlFor="email" className="form__label">
                       Địa chỉ email
                     </label>
@@ -133,15 +143,15 @@ export default function FromContact() {
                   </div>
                   <div className="form__group">
                     <label htmlFor="card-holder" className="form__label">
-                      Họ và tên
+                      Số điện thoại
                     </label>
                     <div className="form__text-input">
                       <input
                         onChange={handleInputChange}
-                        type="text"
-                        name="name"
+                        type="number"
+                        name="phone"
                         id="card-holder"
-                        placeholder="Name"
+                        placeholder="Phone"
                         className="form__input"
                         required=""
                       />

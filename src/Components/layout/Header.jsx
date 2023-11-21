@@ -29,7 +29,7 @@ function Navbar() {
   };
   const navItems = [
     { name: "Trang chủ", hasDropdown: false, link: "/" },
-    { name: "Sản Phẩm", hasDropdown: true, link: "#!" },
+    { name: "Sản Phẩm", hasDropdown: true, link: "/motifiProduct" },
     { name: "Dịch vụ", hasDropdown: false, link: "#!" },
     { name: "Liên hệ", hasDropdown: false, link: "/contact" },
   ];

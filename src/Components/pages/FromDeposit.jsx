@@ -3,7 +3,6 @@ import { useState } from "react";
 import { format, isAfter } from "date-fns";
 import { useLocation } from "react-router";
 import ErrorIcon from "../assets/icon/form-error.svg";
-// import { ref, child, set } from "firebase/database";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
 function InfoCarDeposit(props) {
@@ -55,6 +54,7 @@ export default function FromDeposit() {
   const [formData, setFormData] = useState({
     email: "",
     name: "",
+    phone: "",
     dayPickUp: "",
     note: "",
   });
@@ -67,19 +67,18 @@ export default function FromDeposit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const carDataCollection = collection(db, "DEPOSIT");
-    const carDocRef = doc(carDataCollection, productData.name);
+    const carDocRef = doc(carDataCollection, formData.name);
     try {
       // Set dữ liệu vào Firebase
       await setDoc(carDocRef, {
-        [productData.id]: {
-          name: formData.name,
-          email: formData.email,
-          dayPickUp: formData.dayPickUp,
-          note: formData.note,
-        },
+        car: productData.name,
+        name: formData.name,
+        email: formData.email,
+        dayPickUp: formData.dayPickUp,
+        note: formData.note,
       });
 
-      console.log("Form data set successfully");
+      alert("Form data set successfully");
     } catch (error) {
       console.error("An error occurred:", error);
       // Handle error
@@ -129,6 +128,22 @@ export default function FromDeposit() {
                   onSubmit={handleSubmit}
                 >
                   <div className="form__group">
+                    <label htmlFor="card-holder" className="form__label">
+                      Họ và tên
+                    </label>
+                    <div className="form__text-input">
+                      <input
+                        onChange={handleInputChange}
+                        type="text"
+                        name="name"
+                        id="card-holder"
+                        placeholder="Name"
+                        className="form__input"
+                        required=""
+                      />
+                    </div>
+                  </div>
+                  <div className="form__group">
                     <label htmlFor="email" className="form__label">
                       Địa chỉ email
                     </label>
@@ -150,17 +165,18 @@ export default function FromDeposit() {
                     </div>
                     <p className="form__error">Địa chỉ email không hợp lệ</p>
                   </div>
+
                   <div className="form__group">
                     <label htmlFor="card-holder" className="form__label">
-                      Họ và tên
+                      Số điện thoại
                     </label>
                     <div className="form__text-input">
                       <input
                         onChange={handleInputChange}
-                        type="text"
-                        name="name"
+                        type="number"
+                        name="phone"
                         id="card-holder"
-                        placeholder="Name"
+                        placeholder="Phone"
                         className="form__input"
                         required=""
                       />

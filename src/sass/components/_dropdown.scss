@@ -4,7 +4,7 @@
   padding-top: 30px;
   position: absolute;
   top: 70px;
-  left: 0;
+  left: min(120px, 100%);
   width: min(1240px, 100%);
   padding-top: 34px;
   display: none;
@@ -84,6 +84,7 @@
 
   &__content {
     flex: 1;
+    margin-left: 10px;
   }
 
   &__icon {
@@ -93,10 +94,13 @@
   }
 
   &__heading {
-    margin-top: 4px;
-    font-size: 1.6rem;
-    font-weight: 700;
-    line-height: 150%;
+    &--btn {
+      margin-top: 4px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 150%;
+      cursor: pointer;
+    }
 
     @include abstracts.screen(lg) {
       margin-bottom: 26px;
@@ -138,9 +142,7 @@
   display: none;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--inner-padding);
-
   padding-left: var(--inner-padding);
-
   overflow-y: auto;
 
   @include abstracts.screen(lg) {
@@ -154,7 +156,7 @@
     inset: initial;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    height: var(--max-inner-height);
+    // height: var(--max-inner-height);
     padding-left: 0;
 
     @include abstracts.screen(lg) {

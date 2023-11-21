@@ -25,14 +25,30 @@ function Describer() {
 }
 
 function DetailCarImg({ productData }) {
+  // Tạo mảng images chỉ chứa những ảnh có dữ liệu tối đa là 4 ảnh
   const images = [
     productData.img,
     productData.img1,
     productData.img2,
     productData.img3,
-  ];
+  ].filter((img) => img);
+
   // Xử lý hình ảnh
   const [currentImage, setCurrentImage] = useState(images[0]);
+
+  // Cập nhật danh sách ảnh khi có sự thay đổi trong productData
+  useEffect(() => {
+    const newImages = [
+      productData.img,
+      productData.img1,
+      productData.img2,
+      productData.img3,
+    ].filter((img) => img);
+    if (newImages.length > 0) {
+      setCurrentImage(newImages[0]);
+    }
+  }, [productData]);
+
   const handleImageClick = (image) => {
     setCurrentImage(image);
   };
@@ -255,10 +271,12 @@ function Breadcrumbs({ productData }) {
 }
 
 function ProductSimilar({ productData }) {
+  //
   const navigate = useNavigate();
   const handleClick = (data) => {
     navigate(`/product/${data.id}`, { state: { productData: data } });
   };
+
   const [carData, setCarData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
