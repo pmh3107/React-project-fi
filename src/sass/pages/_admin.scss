@@ -1,0 +1,59 @@
+.admin {
+  margin-top: 50px;
+  &__error {
+    font-size: 3rem;
+    padding: 50px;
+    color: red;
+  }
+  &__noData {
+    padding: 20px;
+    font-size: 1.6rem;
+    color: red;
+  }
+  &__action {
+    // border: none !important;
+    background-color: #ffff;
+    max-width: 200px;
+  }
+  &__action--container {
+    display: flex;
+  }
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tbody {
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+    }
+    th {
+      font-weight: bold;
+    }
+    td:nth-child(1) {
+      font-weight: bold;
+      color: #0011ff;
+    }
+    td:nth-child(3) {
+      font-weight: bold;
+      color: #007bff;
+    }
+    td:nth-child(6) {
+      max-width: 150px;
+    }
+  }
+}
+.delete {
+  background-color: rgb(255, 128, 44);
+}

@@ -90,6 +90,7 @@ function User() {
 
   const navigate = useNavigate();
   useEffect(() => {
+    document.title = "Xe lướt miền Trung | User ";
     const fetchUserData = async () => {
       const user = auth.currentUser;
 

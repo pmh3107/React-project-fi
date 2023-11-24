@@ -54,7 +54,7 @@ export default function FromDeposit() {
   const [formData, setFormData] = useState({
     email: "",
     name: "",
-    phone: "",
+    phone: 0,
     dayPickUp: "",
     note: "",
   });
@@ -73,6 +73,7 @@ export default function FromDeposit() {
       await setDoc(carDocRef, {
         car: productData.name,
         name: formData.name,
+        phone: formData.phone,
         email: formData.email,
         dayPickUp: formData.dayPickUp,
         note: formData.note,

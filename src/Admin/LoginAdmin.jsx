@@ -9,7 +9,7 @@ import IconError from "../Components/assets/icon/form-error.svg";
 import LockIcon from "../Components/assets/icon/lock.svg";
 
 export default function SignInAdmin() {
-  const { login } = useAuth();
+  const { loginAdmin } = useAuth();
   useEffect(() => {
     document.title = "Xe lướt miền Trung | Admin";
   }, []);
@@ -35,10 +35,12 @@ export default function SignInAdmin() {
         loginData.email,
         loginData.password
       );
-      login(userCredential);
-      // Redirect to the desired page after successful login
-      navigate(`/Admin`);
-      // Lưu thông tin đăng nhập khi người dùng đăng nhập
+      if (loginData.email === "admin@gmail.com") {
+        loginAdmin(userCredential);
+        navigate(`/Admin`);
+      } else {
+        setError("Thông tin đăng nhập admin không chính xác !");
+      }
     } catch (error) {
       console.error("Error code:", error.code);
       console.error("Error message:", error.message);
