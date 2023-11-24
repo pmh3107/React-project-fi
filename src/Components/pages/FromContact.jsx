@@ -102,6 +102,7 @@ export default function FromContact() {
                   action=""
                   className="form cart-info__form"
                   onSubmit={handleSubmit}
+                  method="POST"
                 >
                   <div className="form__group">
                     <label htmlFor="card-holder" className="form__label">

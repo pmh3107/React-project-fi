@@ -7,7 +7,10 @@ $error-color: #ed4337;
     opacity: 0.5;
     pointer-events: none;
   }
-
+  &__alert {
+    margin: 20px 0;
+    color: red;
+  }
   &__group {
     margin-top: 30px;
 

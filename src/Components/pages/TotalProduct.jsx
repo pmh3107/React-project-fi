@@ -108,8 +108,6 @@ function TotalProduct() {
       <section className="home__container">
         <div className="home__row">
           <h2 className="home__heading">Xe lướt miền Trung</h2>
-          {/* <Filter /> */}
-
           <div className="search-bar d-md-flex">
             <input
               type="text"

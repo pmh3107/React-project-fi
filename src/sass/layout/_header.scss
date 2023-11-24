@@ -224,7 +224,13 @@
       font-size: 1.5rem !important;
     }
   }
-
+  &__logout {
+    @extend %flexItemsCenter;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0px 20px 60px 10px var(--top-act-group-shadow);
+  }
   &__group {
     @extend %flexItemsCenter;
 
@@ -235,7 +241,16 @@
     background: var(--top-act-group-bg-color);
     box-shadow: 0px 20px 60px 10px var(--top-act-group-shadow);
   }
+  &__container {
+    @extend %flexItemsCenter;
 
+    min-width: 50px;
+    height: 60px;
+
+    border-radius: 8px;
+    background: var(--top-act-group-bg-color);
+    box-shadow: 0px 20px 60px 10px var(--top-act-group-shadow);
+  }
   &__group--single {
     @include abstracts.screen(lg) {
       display: none;
@@ -267,9 +282,12 @@
 
   &__avatar {
     display: block;
+    padding: 5px;
     width: 50px;
     height: 50px;
-    border-radius: 8px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid;
     cursor: pointer;
   }
 }

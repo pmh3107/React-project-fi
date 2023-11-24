@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { db } from "../../Firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { db, auth } from "../../Firebase";
+import { useAuth } from "../AuthContext";
+import {
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  getDoc,
+  query,
+  where,
+} from "firebase/firestore";
 import Product from "./Product";
+import CarIcon from "../assets/icon/buy.svg";
 import ArrowRight from "../assets/icon/arrow-right.svg";
-
 import AvatarCmt1 from "../assets/avatar/avatar-1.png";
 import AvatarCmt2 from "../assets/avatar/avatar-2.png";
 import AvatarCmt3 from "../assets/avatar/avatar-3.png";
@@ -79,6 +88,8 @@ function DetailCarImg({ productData }) {
 
 function DetailCar({ productData }) {
   const navigate = useNavigate();
+  const authContext = useAuth();
+  const { isLoggedIn } = authContext;
   const handleDepositClick = () => {
     navigate(`/deposit`, {
       state: { productData: productData },
@@ -88,6 +99,42 @@ function DetailCar({ productData }) {
     // Xử lý khi không có dữ liệu sản phẩm
     return <div>Không có dữ liệu sản phẩm.</div>;
   }
+
+  const addCar = async (e) => {
+    if (isLoggedIn) {
+      try {
+        const user = auth.currentUser;
+        const uid = user.uid;
+        const userDataCollection = collection(db, "users");
+        const userRef = doc(userDataCollection, uid);
+        const userDoc = await getDoc(userRef);
+        e.preventDefault();
+        if (userDoc.exists()) {
+          const saveCarsRef = collection(userDataCollection, uid, "saveCars");
+          const carDocRef = doc(saveCarsRef, productData.name);
+
+          await setDoc(carDocRef, {
+            brand: productData.brand,
+            name: productData.name,
+            img: productData.img,
+            year: productData.year,
+            kmTraveled: productData.kmTraveled,
+            price: productData.price,
+            register: productData.register,
+          });
+          console.log("Đã thêm dữ liệu về xe thành công:", productData.name);
+          alert("Đã thêm " + productData.name + " thành công ...");
+        } else {
+          console.error("Dữ liệu người dùng không tồn tại");
+        }
+      } catch (error) {
+        console.error("Lỗi khi thêm dữ liệu về xe:", error);
+      }
+    } else {
+      alert("Vui lòng đăng nhập để thực hiện chức năng này ...");
+      e.preventDefault();
+    }
+  };
   return (
     <>
       <Breadcrumbs productData={productData} />
@@ -147,24 +194,9 @@ function DetailCar({ productData }) {
                         />
                         <div>
                           <h4 className="prod-prop__title">Giao xe tận nơi</h4>
-                          <p className="prod-prop__desc">{`Từ 4 - 6 ngày làm việc`}</p>
-                        </div>
-                      </div>
-                      <div className="prod-info__card">
-                        <div className="prod-info__row">
-                          <span className="prod-info__price">
-                            {`Trả góp: 40 triệu/tháng`}
-                          </span>
-                          <span className="prod-info__tax">Lãi xuất 1%</span>
-                        </div>
-                        <p className="prod-info__total-price">{`${productData.price} triệu`}</p>
-                        <div className="prod-info__row">
-                          <button
-                            onClick={handleDepositClick}
-                            className="btn btn--primary prod-info__add-to-cart"
-                          >
-                            Đặt cọc ngay
-                          </button>
+                          <p className="prod-prop__desc">
+                            Từ 4 - 6 ngày làm việc
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -172,6 +204,34 @@ function DetailCar({ productData }) {
                 </div>
               </section>
             </form>
+            <div className="prod-info__card">
+              <div className="prod-info__row">
+                <span className="prod-info__price">
+                  Trả góp: 40 triệu/tháng
+                </span>
+                <span className="prod-info__tax">Lãi xuất 1%</span>
+              </div>
+              <p className="prod-info__total-price">{`Giá tiền: ${productData.price} triệu`}</p>
+              <div className="prod-info__row">
+                <button
+                  onClick={handleDepositClick}
+                  className="btn btn--primary prod-info__add-to-cart"
+                >
+                  Đặt cọc ngay
+                </button>
+                <button
+                  className="btn btn--primary prod-info__add-to-cart"
+                  onClick={addCar}
+                >
+                  Lưu
+                  <img
+                    className="prod-info__add-to-cart--icon"
+                    src={CarIcon}
+                    alt=""
+                  />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -269,7 +329,6 @@ function Breadcrumbs({ productData }) {
 }
 
 function ProductSimilar({ productData }) {
-  //
   const navigate = useNavigate();
   const handleClick = (data) => {
     navigate(`/product/${data.id}`, { state: { productData: data } });
@@ -336,8 +395,8 @@ function ProductDetail() {
   const location = useLocation();
   const productData = location.state && location.state.productData;
   useEffect(() => {
-    document.title = "Xe lướt miền Trung | Chi tiết sản phẩm ";
-  }, []);
+    document.title = `"Xe lướt miền Trung | ${productData.name}"`;
+  }, [productData.name]);
   //xử lý thanh trạng thái
   const [selectedTab, setSelectedTab] = useState(0);
   const tabNames = ["Mô tả", "Đánh giá", "Tương tự"];
@@ -346,12 +405,10 @@ function ProductDetail() {
   };
   return (
     <>
-      {/* MAIN */}
       <main className="product-page">
         <div className="container">
-          {/* Product info */}
           <DetailCar productData={productData} />
-          {/* Product content */}
+
           <div className="product-container">
             <div className="prod-tab">
               <ul className="prod-tab__list">

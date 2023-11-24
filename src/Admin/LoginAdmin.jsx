@@ -1,30 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { db, auth } from "../Firebase";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
-import LogoPrimary from "./commons/Logo";
-import IconBackground from "./assets/authImg/intro.svg";
-import EmailIcon from "./assets/icon/message.svg";
-import IconError from "./assets/icon/form-error.svg";
-import LockIcon from "./assets/icon/lock.svg";
+import { auth } from "../Firebase";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Components/AuthContext";
+import LogoPrimary from "../Components/commons/Logo";
+import EmailIcon from "../Components/assets/icon/message.svg";
+import IconError from "../Components/assets/icon/form-error.svg";
+import LockIcon from "../Components/assets/icon/lock.svg";
 
-function BannerLeft() {
-  return (
-    <div className="auth__intro d-md-none">
-      <img src={IconBackground} alt="" className="auth__intro-img" />
-      <p className="auth__intro-text">
-        Uy tín - Chất lượng là những điều quan trọng mà tập thể Xe lướt miền
-        Trung hướng đến.
-      </p>
-    </div>
-  );
-}
-export default function SignIn() {
+export default function SignInAdmin() {
   const { login } = useAuth();
   useEffect(() => {
-    document.title = "Xe lướt miền Trung | Đăng nhập";
+    document.title = "Xe lướt miền Trung | Admin";
   }, []);
 
   const [loginData, setLoginData] = useState({
@@ -48,18 +35,9 @@ export default function SignIn() {
         loginData.email,
         loginData.password
       );
-      // Fetch user data after successful login
-      const userId = userCredential.user.uid;
-      const userDoc = await getDoc(doc(db, "users", userId));
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-        // Now you have the user data, you can use it as needed
-        login(userData);
-        console.log("User Data:", userData);
-      }
-      setError("");
+      login(userCredential);
       // Redirect to the desired page after successful login
-      navigate(`/${userId}`);
+      navigate(`/Admin`);
       // Lưu thông tin đăng nhập khi người dùng đăng nhập
     } catch (error) {
       console.error("Error code:", error.code);
@@ -74,14 +52,12 @@ export default function SignIn() {
   return (
     <>
       <main className="auth">
-        <BannerLeft />
         <div className="auth__content">
           <div className="auth__content-inner">
             <LogoPrimary />
-            <h1 className="auth__heading">Xin chào!</h1>
+            <h1 className="auth__heading">Xin chào Admin!</h1>
             <p className="auth__desc">
-              Chào mừng bạn đã quay lại với Xe lướt miền Trung. Hãy đăng nhập và
-              khám phá những dòng xe mới nhé ☺️
+              Chào mừng bạn đã quay lại với trang quản lý !
             </p>
             <form
               action="/HomePage"
@@ -130,22 +106,6 @@ export default function SignIn() {
                 </p>
               </div>
               {error && <p className="form__alert">{error}</p>}
-              <div className="form__group form__group--inline">
-                <label className="form__checkbox">
-                  <input
-                    type="checkbox"
-                    name=""
-                    className="form__checkbox-input d-none"
-                  />
-                  <span className="form__checkbox-label">
-                    Ghi nhớ đăng nhập
-                  </span>
-                </label>
-                <a href="/resetPass" className="auth__link form__pull-right">
-                  Quên mật khẩu ?
-                </a>
-              </div>
-
               <div className="form__group auth__btn-group">
                 <button
                   type="submit"
@@ -153,26 +113,8 @@ export default function SignIn() {
                 >
                   Đăng Nhập
                 </button>
-                <button className="btn btn--outline auth__btn btn--no-margin">
-                  <img
-                    src="./assets/icons/google.svg"
-                    alt=""
-                    className="btn__icon icon"
-                  />
-                  Đăng nhập với google
-                </button>
               </div>
             </form>
-
-            <p className="auth__text">
-              Bạn đã có tài khoảng chưa ?
-              <Link to="/signUp" className="auth__link auth__text-link">
-                Đăng kí
-              </Link>
-            </p>
-            <Link to="/loginAdmin" className="auth__link auth__text-link">
-              bạn là Admin ?
-            </Link>
           </div>
         </div>
       </main>
