@@ -123,7 +123,6 @@ function TableDeposit() {
   const ClickToDepositPage = () => {
     window.location.href = "/adminDeposit";
   };
-
   return (
     <div className="cart-info">
       <div className="cart-info__top">
@@ -164,7 +163,7 @@ function TableDeposit() {
     </div>
   );
 }
-function TableCars() {
+function TableCars({ carsCount }) {
   const [noDataFound, setNoDataFound] = useState(false);
   const [carsInfo, setCarsInfo] = useState([]);
   useEffect(() => {
@@ -192,13 +191,18 @@ function TableCars() {
     };
     fetchDataUser();
   }, []);
+  const ClickToCarsPage = () => {
+    window.location.href = "/adminCars";
+  };
   return (
     <div className="cart-info">
       <div className="cart-info__top">
         <h2 className="cart-info__heading cart-info__heading--lv2">
           Thông tin Xe đang bán
         </h2>
-        <button className="btn btn--primary">Chi tiết </button>
+        <button onClick={ClickToCarsPage} className="btn btn--primary">
+          Chi tiết{" "}
+        </button>
       </div>
       <div className="cart-info__separate" />
       <table className="admin__table">

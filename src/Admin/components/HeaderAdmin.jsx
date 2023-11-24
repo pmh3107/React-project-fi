@@ -17,7 +17,7 @@ function Navbar() {
     { name: "Quản lý thông tin", link: "/admin" },
     { name: "Quản lý đơn hàng", link: "/adminDeposit" },
     { name: "Quản lý người dùng", link: "/adminUser" },
-    { name: "Quảng lý sản phẩm", link: "#!" },
+    { name: "Quảng lý sản phẩm", link: "/adminCars" },
   ];
   return (
     <>
