@@ -24,13 +24,11 @@ export const AuthProvider = ({ children }) => {
   const loginAdmin = () => {
     setAdminIsLoggedIn(true);
     localStorage.setItem("isAdminLoggedIn", true);
-    // localStorage.setItem("isLoggedIn", true);
   };
 
   const logoutAdmin = () => {
     setAdminIsLoggedIn(false);
     localStorage.setItem("isAdminLoggedIn", false);
-    // localStorage.setItem("isLoggedIn", true);
   };
   const value = {
     isAdminLoggedIn,

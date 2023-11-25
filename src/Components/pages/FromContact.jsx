@@ -49,7 +49,6 @@ function InfoShowroom() {
 }
 
 export default function FromContact() {
-  // hàm lấy dữ liệu từ form
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -79,7 +78,6 @@ export default function FromContact() {
       alert("Form data set successfully");
     } catch (error) {
       console.error("An error occurred:", error);
-      // Handle error
     }
   };
 

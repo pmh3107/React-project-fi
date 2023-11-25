@@ -3,17 +3,17 @@ import { useEffect } from "react";
 import LightIcon from "../assets/icon/light.svg";
 export default function IconTheme() {
   useEffect(() => {
-    // Kiểm tra giá trị trong localStorage khi component được tạo
+    // Check value of location storage
     if (localStorage.getItem("darkTheme") === "true") {
       document.documentElement.classList.add("dark");
     }
-  }, []); // Chỉ chạy một lần khi component được tạo
+  }, []);
 
   const handleThemeToggle = () => {
-    // Đảo ngược giá trị trong localStorage
+    // localStorage reverse
     const currentTheme = localStorage.getItem("darkTheme") === "true";
     localStorage.setItem("darkTheme", !currentTheme);
-    // Thêm hoặc xóa class "dark" trực tiếp từ thẻ html
+    // add or delete class "dark" directly form html
     document.documentElement.classList.toggle("dark", !currentTheme);
   };
   return (

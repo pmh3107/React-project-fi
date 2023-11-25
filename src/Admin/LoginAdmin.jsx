@@ -13,7 +13,6 @@ export default function SignInAdmin() {
   useEffect(() => {
     document.title = "Xe lướt miền Trung | Admin";
   }, []);
-
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",

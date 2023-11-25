@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import HeaderAdmin from "./components/HeaderAdmin";
 import { db } from "../Firebase";
 import { getDocs, collection } from "firebase/firestore";
-// import { useAuth } from "../Components/AuthContext";
+
 function InfoAdmin(props) {
   return (
     <div className="col-4 col-xl-12">

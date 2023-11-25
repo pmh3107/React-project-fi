@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import Filter from "./Filter";
 import Product from "./Product";
 import IconSearch from "../assets/icon/search.svg";
 import { db } from "../../Firebase";
@@ -7,9 +6,10 @@ import { getDocs, collection, query, where } from "firebase/firestore";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function TotalProduct() {
+  // Transfer data when lick form link before
   const location = useLocation();
   const data = location.state && location.state.productData;
-  // console.log(data);
+  // link to product pages with data of product
   const navigate = useNavigate();
   const handleClick = (data) => {
     navigate(`/product/${data.id}`, { state: { productData: data } });
@@ -28,7 +28,7 @@ function TotalProduct() {
           data.minPrice !== undefined &&
           data.maxPrice !== undefined
         ) {
-          // Lọc theo khoảng giá
+          // filter by price
           const priceQuery = query(
             carsCollectionRef,
             where("price", ">=", data.minPrice),
@@ -36,14 +36,14 @@ function TotalProduct() {
           );
           querySnapshot = await getDocs(priceQuery);
         } else if (typeof data === "string") {
-          // Lọc theo thương hiệu
+          // filter by brand
           const brandQuery = query(
             carsCollectionRef,
             where("brand", "==", data)
           );
           querySnapshot = await getDocs(brandQuery);
         } else {
-          // Không có điều kiện lọc, lấy tất cả
+          // Not filter data, fetch all
           querySnapshot = await getDocs(carsCollectionRef);
         }
 
@@ -71,24 +71,26 @@ function TotalProduct() {
     fetchData();
   }, [data]);
   const handleSearch = async () => {
-    // Kiểm tra xem searchInput có giá trị hay không
+    // Check input have value
     if (searchInput.trim() !== "") {
       const brandName = searchInput.toUpperCase();
       try {
+        // call data and compare
         const carsCollectionRef = collection(db, "cars");
         const brandQuery = query(
           carsCollectionRef,
           where("brand", "==", brandName)
         );
+        // Take data when compare
+        // check all field in data and set id for data
+        // add data in to carArray
         const querySnapshot = await getDocs(brandQuery);
-
         const carDataArray = [];
-
         querySnapshot.forEach((doc) => {
           const carData = { ...doc.data(), id: doc.id };
           carDataArray.push(carData);
         });
-
+        // if have data set it into Car data
         if (carDataArray.length > 0) {
           setCarData(carDataArray);
           setNoDataFound(false);

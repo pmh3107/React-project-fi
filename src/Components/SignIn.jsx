@@ -22,19 +22,18 @@ function BannerLeft() {
   );
 }
 export default function SignIn() {
-  const { login } = useAuth();
-  useEffect(() => {
-    document.title = "Xe lướt miền Trung | Đăng nhập";
-  }, []);
-
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
-
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
+  useEffect(() => {
+    document.title = "Xe lướt miền Trung | Đăng nhập";
+  }, []);
+  // catch data when input
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLoginData((data) => ({ ...data, [name]: value }));
@@ -53,14 +52,11 @@ export default function SignIn() {
       const userDoc = await getDoc(doc(db, "users", userId));
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        // Now you have the user data, you can use it as needed
         login(userData);
         console.log("User Data:", userData);
       }
       setError("");
-      // Redirect to the desired page after successful login
       navigate(`/${userId}`);
-      // Lưu thông tin đăng nhập khi người dùng đăng nhập
     } catch (error) {
       console.error("Error code:", error.code);
       console.error("Error message:", error.message);

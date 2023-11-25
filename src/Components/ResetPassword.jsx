@@ -15,17 +15,6 @@ function FormSignIn() {
     setEmail(e.target.value);
   };
 
-  //   const handleResetPass = () => {
-  //     // Ở đây, bạn có thể thực hiện logic để gửi email
-  //     // Sau khi email được gửi đi, bạn có thể đặt setEmailSent(true)
-  //     // Điều này sẽ hiển thị thông báo rằng email đã được gửi đi.
-  //     // Ví dụ:
-  //     // simulate sending email
-
-  //     setTimeout(() => {
-  //       setEmailSent(true);
-  //     }, 2000);
-  //   };
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Đã gửi mail đặt lại mật khẩu vào email: " + email);

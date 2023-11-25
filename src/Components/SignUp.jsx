@@ -11,6 +11,7 @@ import PhoneIcon from "./assets/icon/phone.svg";
 import UserIcon from "./assets/icon/user.svg";
 
 export default function SignIn() {
+  // Save info user
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -19,26 +20,30 @@ export default function SignIn() {
     checkPassword: "",
   });
   const [error, setError] = useState("");
-
+  // Catch info user when input
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUser((user) => ({ ...user, [name]: value }));
   };
+  // Check password
   const checkPassword = (e) => {
     if (user.password !== user.checkPassword) {
       e.preventDefault();
       setError("Mật khẩu không khớp");
     }
   };
+  // Sign Up button
   const signUp = async (e) => {
     try {
       e.preventDefault();
       checkPassword();
+      // Create user in Authentication
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         user.email,
         user.password
       );
+      // add info user in FireStore
       const userDataColection = collection(db, "users");
       const userData = doc(userDataColection, userCredential.user.uid);
 
@@ -58,10 +63,8 @@ export default function SignIn() {
         checkPassword: "",
       });
     } catch (error) {
-      // Xử lý sau khi đăng ký thành công, có thể chuyển hướng trang hoặc hiển thị thông báo
       console.log("Error code:", error.code);
       console.log("Error message:", error.message);
-      // Check if the error is due to the email already being in use
       if (error.code === "auth/email-already-in-use") {
         alert("Email đã được đăng ký! Vui lòng sử dụng email khác...");
       } else if (error.code === "auth/invalid-email") {

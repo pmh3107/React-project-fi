@@ -41,16 +41,6 @@ function InfoCarDeposit(props) {
   );
 }
 export default function FromDeposit() {
-  // Dữ liệu thông tin xe
-  const location = useLocation();
-  const productData = location.state && location.state.productData;
-  // Tính phí đặt cọc
-  const cashDeposit = (value) => {
-    const cash = value * 0.05;
-    const roundedCash = cash.toFixed(2);
-    return roundedCash;
-  };
-  // hàm lấy dữ liệu từ form
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -58,18 +48,26 @@ export default function FromDeposit() {
     dayPickUp: "",
     note: "",
   });
-
+  // Catch data of car
+  const location = useLocation();
+  const productData = location.state && location.state.productData;
+  // Calculate cost of deposit
+  const cashDeposit = (value) => {
+    const cash = value * 0.05;
+    const roundedCash = cash.toFixed(2);
+    return roundedCash;
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  // submit form and save it to database
   const handleSubmit = async (e) => {
     e.preventDefault();
     const carDataCollection = collection(db, "DEPOSIT");
     const carDocRef = doc(carDataCollection, formData.name);
     try {
-      // Set dữ liệu vào Firebase
+      // Set data into Firebase
       await setDoc(carDocRef, {
         car: productData.name,
         name: formData.name,
@@ -82,10 +80,9 @@ export default function FromDeposit() {
       alert("Form data set successfully");
     } catch (error) {
       console.error("An error occurred:", error);
-      // Handle error
     }
   };
-  // Hàm xử lý ngày tháng năm
+  // day, month, year when select
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), "yyyy-MM-dd")
   );
@@ -101,7 +98,6 @@ export default function FromDeposit() {
       setError("Vui lòng chọn một ngày trong tương lai.");
     }
   };
-
   return (
     <main className="checkout-page">
       <div className="container">

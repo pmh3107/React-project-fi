@@ -30,9 +30,8 @@ function Describer() {
     </>
   );
 }
-
+// show image of car
 function DetailCarImg({ productData }) {
-  // Tạo mảng images chỉ chứa những ảnh có dữ liệu tối đa là 4 ảnh
   const images = [
     productData.img,
     productData.img1,
@@ -40,10 +39,8 @@ function DetailCarImg({ productData }) {
     productData.img3,
   ].filter((img) => img);
 
-  // Xử lý hình ảnh
   const [currentImage, setCurrentImage] = useState(images[0]);
 
-  // Cập nhật danh sách ảnh khi có sự thay đổi trong productData
   useEffect(() => {
     const newImages = [
       productData.img,
@@ -55,7 +52,7 @@ function DetailCarImg({ productData }) {
       setCurrentImage(newImages[0]);
     }
   }, [productData]);
-
+  // click to show image
   const handleImageClick = (image) => {
     setCurrentImage(image);
   };
@@ -96,10 +93,9 @@ function DetailCar({ productData }) {
     });
   };
   if (!productData) {
-    // Xử lý khi không có dữ liệu sản phẩm
     return <div>Không có dữ liệu sản phẩm.</div>;
   }
-
+  // fetch data car and save it into fireStore of user
   const addCar = async (e) => {
     if (isLoggedIn) {
       try {
@@ -264,8 +260,6 @@ function RateUser() {
       <div className="prod-content">
         <h2 className="prod-content__heading">Đánh giá từ người dùng</h2>
         <div className="row row-cols-3 gx-lg-2 row-cols-md-1 gy-md-3">
-          {/* Review card 1 */}
-
           {commentUser.map((content, index) => (
             <div className="col">
               <div className="review-card">

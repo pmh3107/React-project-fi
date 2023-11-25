@@ -6,11 +6,7 @@ import { AuthProvider } from "./Components/AuthContext";
 import "./sass/main.scss";
 
 const rootElement = document.getElementById("root");
-
-// Use createRoot from "react-dom/client" instead of "react-dom"
 const root = ReactDOM.createRoot(rootElement);
-
-// Wrap your application component with root.render
 root.render(
   <React.StrictMode>
     <Router>

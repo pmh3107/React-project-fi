@@ -301,6 +301,22 @@ function TableDataUser() {
   );
 }
 function AdminUser() {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    document.title = "Xe lướt miền trung | admin";
+    //Check login
+    const checkLoggedIn = () => {
+      const storedIsLoggedIn =
+        localStorage.getItem("isAdminLoggedIn") === "false";
+      if (storedIsLoggedIn) {
+        setLoading(true);
+      }
+    };
+    checkLoggedIn();
+  }, []);
+  if (loading) {
+    return <p className="admin__error">Loading ...... </p>;
+  }
   return (
     <>
       <HeaderAdmin />

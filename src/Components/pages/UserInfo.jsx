@@ -8,6 +8,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+// Catch data and show
 function InfoUser(props) {
   return (
     <div className="col-4 col-xl-12">
@@ -32,6 +33,7 @@ function InfoUser(props) {
     </div>
   );
 }
+// show car saved of user
 function InfoCarSaved(props) {
   return (
     <div className="cart-info">
@@ -91,21 +93,21 @@ function User() {
   const navigate = useNavigate();
   useEffect(() => {
     document.title = "Xe lướt miền Trung | User ";
+    // fetch data
     const fetchUserData = async () => {
       const user = auth.currentUser;
-
       if (user) {
         const uid = user.uid;
         const userRef = doc(db, "users", uid);
         const savedCarsCollection = collection(userRef, "saveCars");
-
         try {
           const userSnap = await getDoc(userRef);
           const querySnapshot = await getDocs(savedCarsCollection);
-
+          // ternary operation
+          // check user data if true -> fetch data if false -> null
           const userData = userSnap.exists() ? userSnap.data() : null;
+          // fetch all cars saved
           const carsData = querySnapshot.docs.map((doc) => doc.data());
-
           setUserInfo(userData);
           setSavedCars(carsData);
         } catch (error) {
@@ -117,16 +119,14 @@ function User() {
     };
     fetchUserData();
   }, [savedCars]);
-
-  if (loading) {
-    return <p className="user__error">Loading...</p>;
-  }
+  // Link to page
   const handleClick = (car) => {
     navigate(`/product/${car.id}`, { state: { productData: car } });
   };
   const ClickBuy = (car) => {
     navigate(`/deposit/`, { state: { productData: car } });
   };
+  // Delete car saved
   const handleDeleteCar = async (carId) => {
     const user = auth.currentUser;
 
@@ -137,12 +137,16 @@ function User() {
       try {
         await deleteDoc(carRef);
         // Update the local state after successful deletion
+        // Use previous id data check with new id if match -> delete id
         setSavedCars((prevCars) => prevCars.filter((car) => car.id !== carId));
       } catch (error) {
         console.error("Error deleting car:", error);
       }
     }
   };
+  if (loading) {
+    return <p className="user__error">Loading...</p>;
+  }
   return (
     <main className="container user">
       <div className="row gy-xl-3">

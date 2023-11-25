@@ -28,14 +28,14 @@ export default function BannerWeb() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Tăng chỉ số hiện tại lên 1, nếu đã ở cuối danh sách, quay lại đầu
+      // increase index to 1 after 5s
       setCurrentIndex((prevIndex) =>
         prevIndex === SlideShowData.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // 5 giây
+    }, 5000);
 
     return () => {
-      clearInterval(interval); // Hủy interval khi component bị hủy
+      clearInterval(interval); // cancel interval when component canceled
     };
   }, [SlideShowData.length]);
 

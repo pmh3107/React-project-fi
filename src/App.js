@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./Components/Homepage";
-import ContactPage from "./Components/ContactPage";
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
+import HomePage from "./Components/Homepage";
+import ContactPage from "./Components/ContactPage";
 import ResetPassWord from "./Components/ResetPassword";
 import ProductCustom from "./Components/ProductCustom";
 import ProductDetailTotal from "./Components/ProductDetailTotal";
-import Admin from "./Admin/Admin";
 import Deposit from "./Components/Deposit";
 import User from "./Components/User";
 import Error404 from "./Components/Error";
 import LoginAdmin from "./Admin/LoginAdmin";
+import Admin from "./Admin/Admin";
 import AdminDeposit from "./Admin/AdminDeposit";
 import AdminUser from "./Admin/AdminUser";
-import { useAuth } from "./Components/AuthContext";
 import AdminCars from "./Admin/AdminCars";
+import { useAuth } from "./Components/AuthContext";
 function App() {
   const { setIsLoggedIn } = useAuth();
 
@@ -27,7 +27,6 @@ function App() {
         setIsLoggedIn(storedIsLoggedIn);
       }
     };
-
     checkAndRestoreLogin();
   }, [setIsLoggedIn]);
   return (

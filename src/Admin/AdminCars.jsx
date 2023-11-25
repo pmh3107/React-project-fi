@@ -14,6 +14,7 @@ function TableCars() {
   const [carsInfo, setCarsInfo] = useState([]);
   const [showAddCar, setShowAddCar] = useState(false);
   const [showCusCar, setShowCusCar] = useState(false);
+
   const [car, setCar] = useState({
     brand: "",
     name: "",
@@ -352,6 +353,22 @@ function TableCars() {
   );
 }
 function AdminCars() {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    document.title = "Xe lướt miền trung | admin";
+    //Check login
+    const checkLoggedIn = () => {
+      const storedIsLoggedIn =
+        localStorage.getItem("isAdminLoggedIn") === "false";
+      if (storedIsLoggedIn) {
+        setLoading(true);
+      }
+    };
+    checkLoggedIn();
+  }, []);
+  if (loading) {
+    return <p className="admin__error">Loading ...... </p>;
+  }
   return (
     <>
       <HeaderAdmin />
