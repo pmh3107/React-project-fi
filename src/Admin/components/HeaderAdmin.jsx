@@ -14,7 +14,8 @@ function NavbarItem({ link, name }) {
 }
 function Navbar() {
   const navItems = [
-    { name: "Quản lý thông tin", link: "/admin" },
+    { name: "Admin", link: "/admin" },
+    { name: "Quản lý phản hồi", link: "/adminContact" },
     { name: "Quản lý đơn hàng", link: "/adminDeposit" },
     { name: "Quản lý người dùng", link: "/adminUser" },
     { name: "Quảng lý sản phẩm", link: "/adminCars" },

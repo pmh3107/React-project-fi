@@ -21,6 +21,9 @@ function InfoAdmin(props) {
           <h3 className="payment-item__title">
             Xe đặt cọc : {props.numDeposit}
           </h3>
+          <h3 className="payment-item__title">
+            Đơn liên hệ : {props.numContact}
+          </h3>
         </article>
       </div>
     </div>
@@ -234,12 +237,83 @@ function TableCars({ carsCount }) {
     </div>
   );
 }
+function TableContact() {
+  const [noDataFound, setNoDataFound] = useState(false);
+  const [contactInfo, setContactInfo] = useState([]);
+  useEffect(() => {
+    const fetchDataUser = async () => {
+      try {
+        const contactCollection = collection(db, "CONTACT");
+        let querySnapshot = await getDocs(contactCollection);
+        const contactDataArray = [];
+        querySnapshot.forEach((doc) => {
+          const contactData = { ...doc.data(), id: doc.id };
+          contactDataArray.push(contactData);
+        });
+        if (contactDataArray.length > 0) {
+          setContactInfo(contactDataArray);
+          setNoDataFound(false);
+          console.log("Upload data from cars successfully");
+        } else {
+          setContactInfo(null);
+          setNoDataFound(true);
+          console.log("No documents found in the 'users' collection!");
+        }
+      } catch (error) {
+        console.error("Error getting documents:", error);
+      }
+    };
+    fetchDataUser();
+  }, []);
+  const ClickToContactPage = () => {
+    window.location.href = "/adminContact";
+  };
+  return (
+    <div className="cart-info">
+      <div className="cart-info__top">
+        <h2 className="cart-info__heading cart-info__heading--lv2">
+          Thông tin đơn liên hệ
+        </h2>
+        <button onClick={ClickToContactPage} className="btn btn--primary">
+          Chi tiết
+        </button>
+      </div>
+      <div className="cart-info__separate" />
+      <table className="admin__table">
+        <tbody>
+          <tr>
+            <th>Họ và tên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Tiêu đề</th>
+            <th>Nội dung</th>
+          </tr>
+          {noDataFound ? (
+            <p className="admin__noData">Không tìm thấy dữ liệu !</p>
+          ) : (
+            contactInfo?.map((depo) => (
+              <tr key={depo.id}>
+                <td>{depo.name}</td>
+                <td>{depo.email}</td>
+                <td>{depo.phone}</td>
+                <td>{depo.address}</td>
+                <td>{depo.title}</td>
+                <td>{depo.content}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 function Admin() {
   const [loading, setLoading] = useState(false);
   const [userCount, setUserCount] = useState(0);
   const [carsCount, setCarsCount] = useState(0);
   const [depositCount, setDepositCount] = useState(0);
-
+  const [contactCount, setContactCount] = useState(0);
   useEffect(() => {
     document.title = "Trang quản lý | Xe lướt miền Trung";
     //Check login
@@ -278,6 +352,16 @@ function Admin() {
         console.error("Error getting users count:", error);
       }
     };
+    const getContactCount = async () => {
+      const ContactCollection = collection(db, "CONTACT");
+      try {
+        const querySnapshot = await getDocs(ContactCollection);
+        setContactCount(querySnapshot.size);
+      } catch (error) {
+        console.error("Error getting users count:", error);
+      }
+    };
+    getContactCount();
     getDepositCount();
     getCarsCount();
     getUsersCount();
@@ -295,9 +379,11 @@ function Admin() {
             userNum={userCount}
             numProduct={carsCount}
             numDeposit={depositCount}
+            numContact={contactCount}
           />
           <div className="col-8 col-xl-12">
             <TableDeposit />
+            <TableContact />
             <TableDataUser />
             <TableCars />
           </div>

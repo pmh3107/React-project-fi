@@ -15,6 +15,7 @@ import Admin from "./Admin/Admin";
 import AdminDeposit from "./Admin/AdminDeposit";
 import AdminUser from "./Admin/AdminUser";
 import AdminCars from "./Admin/AdminCars";
+import AdminContact from "./Admin/AdminContact";
 import { useAuth } from "./Components/AuthContext";
 function App() {
   const { setIsLoggedIn } = useAuth();
@@ -44,6 +45,7 @@ function App() {
       <Route path="/loginAdmin" element={<LoginAdmin />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/adminDeposit" element={<AdminDeposit />} />
+      <Route path="/adminContact" element={<AdminContact />} />
       <Route path="/adminUser" element={<AdminUser />} />
       <Route path="/adminCars" element={<AdminCars />} />
       <Route path="/deposit" element={<Deposit />} />
