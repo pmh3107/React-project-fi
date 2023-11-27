@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import HeaderAdmin from "./components/HeaderAdmin";
 import { db } from "../Firebase";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  updateDoc,
+} from "firebase/firestore";
 function TableDeposit() {
   const [noDataFound, setNoDataFound] = useState(false);
   const [depositInfo, setDepositInfo] = useState([]);
@@ -45,6 +53,46 @@ function TableDeposit() {
       }
     }
   };
+  const handleConfirmation = async (nameUser, car, day) => {
+    try {
+      // Get the reference to the "users" collection
+      const usersCollectionRef = collection(db, "users");
+
+      // Query users with the specified name
+      const q = query(usersCollectionRef, where("name", "==", nameUser));
+      const usersSnapshot = await getDocs(q);
+
+      // Check if there are no matching users
+      if (usersSnapshot.empty) {
+        const sendEmail = window.confirm(
+          "Người dùng chưa có tài khoản! Gửi thông tin đến email?"
+        );
+
+        if (sendEmail) {
+          // Implement logic to send email
+          console.log("Sending email...");
+        }
+
+        return;
+      }
+
+      // Iterate over matching users and confirm them
+      usersSnapshot.forEach(async (userDoc) => {
+        const userId = userDoc.id;
+
+        // Update the user document to add the "confirm" and "car" fields
+        await updateDoc(doc(usersCollectionRef, userId), {
+          confirm: true,
+          car: car,
+          dayPickUp: day,
+        });
+        alert("Đã gửi xác nhận đến user ....");
+        console.log("Xác nhận thành công !");
+      });
+    } catch (error) {
+      console.error("Lỗi xác nhận:", error);
+    }
+  };
   return (
     <div className="cart-info">
       <div className="cart-info__top">
@@ -76,7 +124,14 @@ function TableDeposit() {
                 <td>{depo.note}</td>
                 <td className="admin__action">
                   <div className="admin__action--container">
-                    <button className="btn btn--primary">Tạo hợp đồng</button>
+                    <button
+                      className="btn btn--primary"
+                      onClick={() =>
+                        handleConfirmation(depo.name, depo.car, depo.dayPickUp)
+                      }
+                    >
+                      Xác nhận
+                    </button>
                     <button
                       onClick={() => handleDelete(depo.name)}
                       className="btn btn--primary delete"

@@ -4,7 +4,219 @@ import IconSearch from "../assets/icon/search.svg";
 import { db } from "../../Firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { useNavigate, useLocation } from "react-router-dom";
+import FilterIcon from "../assets/icon/filter.svg";
+import ArrowUp from "../assets/icon/arrow-up.png";
 
+function Filter({ setCarData, setNoDataFound }) {
+  const [filterOptions, setFilterOptions] = useState({
+    minPrice: "",
+    maxPrice: "",
+    brand: "",
+  });
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const filterCar = async () => {
+    try {
+      const carsCollectionRef = collection(db, "cars");
+      let querySnapshot;
+      if (
+        filterOptions.minPrice !== "" &&
+        filterOptions.maxPrice !== "" &&
+        filterOptions.brand !== ""
+      ) {
+        // filter by brand
+        const brandName = filterOptions.brand.toUpperCase();
+        const brandQuery = query(
+          carsCollectionRef,
+          where("price", ">=", filterOptions.minPrice),
+          where("price", "<=", filterOptions.maxPrice),
+          where("brand", "==", brandName)
+        );
+        querySnapshot = await getDocs(brandQuery);
+      } else if (filterOptions.brand !== "") {
+        // filter by brand
+        const brandName = filterOptions.brand.toUpperCase();
+        const brandQuery = query(
+          carsCollectionRef,
+          where("brand", "==", brandName)
+        );
+        querySnapshot = await getDocs(brandQuery);
+      } else if (
+        filterOptions.minPrice !== "" &&
+        filterOptions.maxPrice !== ""
+      ) {
+        // filter by price
+        const priceQuery = query(
+          carsCollectionRef,
+          where("price", ">=", filterOptions.minPrice),
+          where("price", "<=", filterOptions.maxPrice)
+        );
+        querySnapshot = await getDocs(priceQuery);
+      } else {
+        // No filters applied
+        querySnapshot = await getDocs(carsCollectionRef);
+      }
+
+      const carDataArray = [];
+      querySnapshot.forEach((doc) => {
+        const carData = { ...doc.data(), id: doc.id };
+        carDataArray.push(carData);
+      });
+
+      if (carDataArray.length > 0) {
+        setCarData(carDataArray);
+        setNoDataFound(false);
+        console.log("Upload data from cars successfully");
+        setIsFilterVisible(false);
+      } else {
+        setCarData(null);
+        setNoDataFound(true);
+        console.log("No documents found in the 'cars' collection!");
+      }
+    } catch (error) {
+      console.error("Error getting documents:", error);
+    }
+  };
+  const toggleFilter = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
+  const cancel = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
+  return (
+    <>
+      <div className="filter-wrap">
+        <button className="filter-btn js-toggle" onClick={toggleFilter}>
+          Bộ lọc
+          <img src={FilterIcon} alt="" className="filter-btn__icon icon" />
+        </button>
+        <div
+          id="home-filter"
+          className={`filter ${isFilterVisible ? "" : "hide"}`}
+        >
+          <img src={ArrowUp} alt="" className="filter__arrow" />
+          <h3 className="filter__heading">BỘ LỌC</h3>
+          <form action="" className="filter__form form">
+            <div className="filter__row filter__content">
+              <div className="filter__col">
+                <label htmlFor="" className="form__label">
+                  Khoảng giá
+                </label>
+                <div className="filter__form-group filter__form-group--inline">
+                  <div>
+                    <label
+                      htmlFor=""
+                      className="form__label form__label--small"
+                    >
+                      Thấp nhất
+                    </label>
+                    <div className="filter__form-text-input filter__form-text-input--small">
+                      <input
+                        type="text"
+                        name=""
+                        id=""
+                        className="filter__form-input"
+                        defaultValue="250tr"
+                        value={
+                          filterOptions.minPrice === ""
+                            ? ""
+                            : filterOptions.minPrice
+                        }
+                        onChange={(e) =>
+                          setFilterOptions({
+                            ...filterOptions,
+                            minPrice:
+                              e.target.value === ""
+                                ? ""
+                                : parseFloat(e.target.value),
+                          })
+                        }
+                      />
+                      <p>Triệu</p>
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor=""
+                      className="form__label form__label--small"
+                    >
+                      Cao nhất
+                    </label>
+                    <div className="filter__form-text-input filter__form-text-input--small">
+                      <input
+                        type="text"
+                        name=""
+                        id=""
+                        className="filter__form-input"
+                        defaultValue="10ty"
+                        value={
+                          filterOptions.maxPrice === ""
+                            ? ""
+                            : filterOptions.maxPrice
+                        }
+                        onChange={(e) =>
+                          setFilterOptions({
+                            ...filterOptions,
+                            maxPrice:
+                              e.target.value === ""
+                                ? ""
+                                : parseFloat(e.target.value),
+                          })
+                        }
+                      />
+                      <p>Triệu</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="filter__separate" />
+              <div className="filter__col">
+                <label htmlFor="" className="form__label">
+                  Hãng xe
+                </label>
+                <div className="filter__form-group">
+                  <div className="form__select-wrap">
+                    <select
+                      className="form__select"
+                      value={filterOptions.brand}
+                      onChange={(e) =>
+                        setFilterOptions({
+                          ...filterOptions,
+                          brand: e.target.value,
+                        })
+                      }
+                    >
+                      <option value="">Hãng xe</option>
+                      <option value="HONDA">Honda</option>
+                      <option value="TOYOTA">Toyota</option>
+                      <option value="VINFAST">Vinfast</option>
+                      <option value="FORD">Ford</option>
+                      <option value="KIA">KIA</option>
+                      <option value="MERCEDES">Mercedes</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div className="filter__row filter__footer">
+            <button
+              className="btn btn--text filter__cancel"
+              onClick={() => cancel()}
+            >
+              Hủy
+            </button>
+            <button
+              onClick={() => filterCar()}
+              className="btn btn--primary filter__submit"
+            >
+              Tìm kiếm
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
 function TotalProduct() {
   // Transfer data when lick form link before
   const location = useLocation();
@@ -124,6 +336,7 @@ function TotalProduct() {
               <img src={IconSearch} alt="" className="search-bar__icon icon" />
             </button>
           </div>
+          <Filter setCarData={setCarData} setNoDataFound={setNoDataFound} />
         </div>
 
         {noDataFound ? (

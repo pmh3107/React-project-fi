@@ -33,6 +33,35 @@ function InfoUser(props) {
     </div>
   );
 }
+// show notification
+// Catch data and show
+function Notify(props) {
+  return (
+    <div className="cart-info">
+      <h2 className="cart-info__heading cart-info__heading--lv2 user__heading">
+        Thông báo!
+      </h2>
+      <div className="cart-info__separate" />
+      <article className="payment-item payment-item__customs">
+        <h3 className="payment-item__title">
+          Đơn đặt cọc xe{" "}
+          <span className="payment-item__title--hl">{props.carName}</span> của
+          quý khách đã được xác nhận, kính mong quý khách đến làm thủ tục nhận
+          xe vào <span className="payment-item__title--hl">{props.day}</span>.
+        </h3>
+        <h3 className="payment-item__title">
+          Cám ơn quý khách đã tin tưởng và mua xe !
+        </h3>
+      </article>
+      <button
+        onClick={props.hideTag}
+        className="payment-item__btn btn btn-primary"
+      >
+        Ẩn
+      </button>
+    </div>
+  );
+}
 // show car saved of user
 function InfoCarSaved(props) {
   return (
@@ -89,7 +118,8 @@ function User() {
   const [userInfo, setUserInfo] = useState(null);
   const [savedCars, setSavedCars] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [userAlert, setUserAlert] = useState({});
+  const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     document.title = "Xe lướt miền Trung | User ";
@@ -101,6 +131,10 @@ function User() {
         const userRef = doc(db, "users", uid);
         const savedCarsCollection = collection(userRef, "saveCars");
         try {
+          // fetch data user
+          const userDataCollection = collection(db, "users");
+          const userInfo = await getDoc(doc(userDataCollection, uid));
+          setUserAlert(userInfo.data() || {});
           const userSnap = await getDoc(userRef);
           const querySnapshot = await getDocs(savedCarsCollection);
           // ternary operation
@@ -117,8 +151,17 @@ function User() {
         }
       }
     };
+    const checkAlert = () => {
+      const alertValue = userAlert.confirm;
+      if (alertValue === true) {
+        setShowAlert(true);
+      } else {
+        setShowAlert(false);
+      }
+    };
+    checkAlert();
     fetchUserData();
-  }, [savedCars]);
+  }, [savedCars, userAlert.confirm]);
   // Link to page
   const handleClick = (car) => {
     navigate(`/product/${car.id}`, { state: { productData: car } });
@@ -129,7 +172,6 @@ function User() {
   // Delete car saved
   const handleDeleteCar = async (carId) => {
     const user = auth.currentUser;
-
     if (user) {
       const uid = user.uid;
       const carRef = doc(db, "users", uid, "saveCars", carId);
@@ -143,6 +185,9 @@ function User() {
         console.error("Error deleting car:", error);
       }
     }
+  };
+  const hide = (e) => {
+    setShowAlert(false);
   };
   if (loading) {
     return <p className="user__error">Loading...</p>;
@@ -160,6 +205,13 @@ function User() {
           <p>User data not available</p>
         )}
         <div className="col-8 col-xl-12">
+          {showAlert ? (
+            <Notify
+              carName={userAlert.car}
+              day={userAlert.dayPickUp}
+              hideTag={() => hide()}
+            />
+          ) : null}
           {savedCars?.map((car, index) => (
             <InfoCarSaved
               key={index}

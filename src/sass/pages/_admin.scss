@@ -55,6 +55,12 @@
   &__table--img {
     width: 100px;
   }
+  &__filter {
+    margin-left: auto;
+  }
+  &__input {
+    padding: 20px;
+  }
 }
 .delete {
   background-color: rgb(255, 128, 44);

@@ -9,6 +9,7 @@ import ProductCustom from "./Components/ProductCustom";
 import ProductDetailTotal from "./Components/ProductDetailTotal";
 import Deposit from "./Components/Deposit";
 import User from "./Components/User";
+import Sent from "./Components/Sent";
 import Error404 from "./Components/Error";
 import LoginAdmin from "./Admin/LoginAdmin";
 import Admin from "./Admin/Admin";
@@ -51,6 +52,7 @@ function App() {
       <Route path="/deposit" element={<Deposit />} />
       <Route path="/product/:productID" element={<ProductDetailTotal />} />
       <Route path="/404" element={<Error404 />} />
+      <Route path="/sent" element={<Sent />} />
     </Routes>
   );
 }

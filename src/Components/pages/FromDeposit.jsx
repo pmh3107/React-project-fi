@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { format, isAfter } from "date-fns";
-import { useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 import ErrorIcon from "../assets/icon/form-error.svg";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
@@ -48,6 +48,7 @@ export default function FromDeposit() {
     dayPickUp: "",
     note: "",
   });
+  const navigate = useNavigate();
   // Catch data of car
   const location = useLocation();
   const productData = location.state && location.state.productData;
@@ -76,8 +77,8 @@ export default function FromDeposit() {
         dayPickUp: formData.dayPickUp,
         note: formData.note,
       });
-
-      alert("Form data set successfully");
+      console.log("successful !");
+      navigate(`/sent`, { state: { productData: formData } });
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -98,6 +99,7 @@ export default function FromDeposit() {
       setError("Vui lòng chọn một ngày trong tương lai.");
     }
   };
+
   return (
     <main className="checkout-page">
       <div className="container">
@@ -234,7 +236,7 @@ export default function FromDeposit() {
                     type="submit"
                     className="cart-info__next-btn btn btn--primary btn--rounded"
                   >
-                    Tiến hành thanh toán
+                    Xác nhận đặt cọc
                   </button>
                 </form>
               </div>
