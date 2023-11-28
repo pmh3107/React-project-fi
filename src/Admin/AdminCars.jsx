@@ -19,6 +19,7 @@ function Filter({ setCarData, setNoDataFound }) {
     maxPrice: "",
     brand: "",
     kmTraveled: "",
+    year: "",
   });
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const filterCar = async () => {
@@ -63,6 +64,13 @@ function Filter({ setCarData, setNoDataFound }) {
         const priceQuery = query(
           carsCollectionRef,
           where("kmTraveled", "<=", filterOptions.kmTraveled)
+        );
+        querySnapshot = await getDocs(priceQuery);
+      } else if (filterOptions.year !== "") {
+        // filter by price
+        const priceQuery = query(
+          carsCollectionRef,
+          where("year", "==", filterOptions.year)
         );
         querySnapshot = await getDocs(priceQuery);
       } else {
@@ -238,6 +246,34 @@ function Filter({ setCarData, setNoDataFound }) {
                       }
                     />
                     <p>km</p>
+                  </div>
+                </div>
+              </div>
+              <div className="filter__separate" />
+              <div className="filter__col">
+                <label htmlFor="" className="form__label">
+                  Năm sản xuất
+                </label>
+                <div className="filter__form-group">
+                  <div className="form__select-wrap admin__input">
+                    <input
+                      type="text"
+                      name=""
+                      id=""
+                      className="filter__form-input "
+                      value={
+                        filterOptions.year === "" ? "" : filterOptions.year
+                      }
+                      onChange={(e) =>
+                        setFilterOptions({
+                          ...filterOptions,
+                          year:
+                            e.target.value === ""
+                              ? ""
+                              : parseFloat(e.target.value),
+                        })
+                      }
+                    />
                   </div>
                 </div>
               </div>
