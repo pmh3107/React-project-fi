@@ -1,0 +1,24 @@
+.user {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  &__avatar {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+  &__heading {
+    text-align: center;
+  }
+  &__error {
+    font-size: 3rem;
+    padding: 20px;
+  }
+  &__carInfo--img {
+    border-radius: 8px;
+  }
+  &__delete {
+    background-color: rgb(255, 128, 44);
+  }
+}

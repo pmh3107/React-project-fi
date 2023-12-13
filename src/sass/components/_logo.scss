@@ -1,0 +1,7 @@
+@use "../abstracts";
+
+.logo {
+  &__img {
+    width: 130px;
+  }
+}

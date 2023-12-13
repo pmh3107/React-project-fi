@@ -1,0 +1,41 @@
+.sent {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__container {
+    border: 2px solid black;
+    padding: 50px;
+    border-radius: 20px;
+    background-color: #fff;
+  }
+  &__heading {
+    padding: 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+  }
+  &__title {
+    max-width: 800px;
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 2;
+  }
+  &__img {
+    display: block;
+    margin: 0 auto;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__content--btn {
+    max-width: 250px;
+    font-size: 2.5rem;
+    height: 70px;
+    background-color: #b6d9f0;
+  }
+}
