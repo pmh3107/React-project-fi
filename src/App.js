@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
 import HomePage from "./Components/Homepage";
@@ -32,28 +32,30 @@ function App() {
     checkAndRestoreLogin();
   }, [setIsLoggedIn]);
   return (
-    <Routes>
-      <Route path="/:userId" element={<HomePage />} />
-      <Route path="/" element={<HomePage />} />
-      <Route path="/contact" element={<ContactPage />} />
-      <Route path="/signIn" element={<SignIn />} />
-      <Route path="/signUp" element={<SignUp />} />
-      <Route path="/resetPass" element={<ResetPassWord />} />
-      <Route path="/motifiProduct/:Price" element={<ProductCustom />} />
-      <Route path="/motifiProduct/:brandTitle" element={<ProductCustom />} />
-      <Route path="/motifiProduct" element={<ProductCustom />} />
-      <Route path="/user" element={<User />} />
-      <Route path="/loginAdmin" element={<LoginAdmin />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/adminDeposit" element={<AdminDeposit />} />
-      <Route path="/adminContact" element={<AdminContact />} />
-      <Route path="/adminUser" element={<AdminUser />} />
-      <Route path="/adminCars" element={<AdminCars />} />
-      <Route path="/deposit" element={<Deposit />} />
-      <Route path="/product/:productID" element={<ProductDetailTotal />} />
-      <Route path="/404" element={<Error404 />} />
-      <Route path="/sent" element={<Sent />} />
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/:userId" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/resetPass" element={<ResetPassWord />} />
+        <Route path="/motifiProduct/:Price" element={<ProductCustom />} />
+        <Route path="/motifiProduct/:brandTitle" element={<ProductCustom />} />
+        <Route path="/motifiProduct" element={<ProductCustom />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/loginAdmin" element={<LoginAdmin />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/adminDeposit" element={<AdminDeposit />} />
+        <Route path="/adminContact" element={<AdminContact />} />
+        <Route path="/adminUser" element={<AdminUser />} />
+        <Route path="/adminCars" element={<AdminCars />} />
+        <Route path="/deposit" element={<Deposit />} />
+        <Route path="/product/:productID" element={<ProductDetailTotal />} />
+        <Route path="/404" element={<Error404 />} />
+        <Route path="/sent" element={<Sent />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

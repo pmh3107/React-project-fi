@@ -1,8 +1,8 @@
 {
+  "homepage": "https://pmh3107.github.io/React-project-fi/",
   "name": "uth-project-fi",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-regular-svg-icons": "^6.4.2",

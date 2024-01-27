@@ -119,6 +119,7 @@ $gutters: (
 
 @each $breakpoint, $dimension in $grid-breakpoints {
   $max-width: map-get($container-max-widths, $breakpoint);
+  $breagikpoint: 10; // Replace 10 with the appropriate value
   $infix: "-#{$breakpoint}";
 
   @include make-media-query($dimension) {
